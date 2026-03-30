@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "firebase": "^12.11.0",
-    "vue": "^3.5.30"
+    "html2pdf.js": "^0.14.0",
+    "pinia": "^3.0.4",
+    "vue": "^3.5.30",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.2",

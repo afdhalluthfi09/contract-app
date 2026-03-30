@@ -1,19 +1,20 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-import { getAuth, signInAnonymously } from 'firebase/auth';
+// src/firebase.js
+import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBq65ch6rt011mHa4xv_yhdRuBVAI16HVQ",
-  authDomain: "agency-contract-app.firebaseapp.com",
-  projectId: "agency-contract-app",
-  storageBucket: "agency-contract-app.firebasestorage.app",
-  messagingSenderId: "379896466856",
-  appId: "1:379896466856:web:fe60dd6e5946cc2575619d"
-};
+  apiKey:            import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain:        import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId:         import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket:     import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId:             import.meta.env.VITE_FIREBASE_APP_ID,
+}
 
-export const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-export const auth = getAuth(app);
+export const app = initializeApp(firebaseConfig)
+export const db  = getFirestore(app)
+export const auth = getAuth(app)
 
-// Klien otomatis login tanpa sadar agar punya izin nulis TTD
-signInAnonymously(auth);
+// PENTING: signInAnonymously TIDAK dipanggil di sini lagi
+// Akan dipanggil secara kondisional di router nanti (step 4.5)
