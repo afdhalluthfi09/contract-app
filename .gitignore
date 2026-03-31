@@ -27,3 +27,4 @@ Dockerfile.dev
 package-lock.json
 .vscode/
 .env
+.idx/

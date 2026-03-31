@@ -128,46 +128,128 @@
       (2) Apabila tidak mencapai mufakat, diselesaikan secara hukum di Pengadilan Negeri {{ c.pengadilan }}.
     </p>
 
-    <!-- TANDA TANGAN -->
-    <div style="margin-top: 40px; margin-bottom: 20px;">
-      <p>
-        <strong>Ditandatangani di: {{ c.lokasi }}</strong><br>
-        <strong>Tanggal: {{ c.tanggal }} {{ c.bulan }} {{ c.tahun }}</strong>
-      </p>
-    </div>
+    <!-- ═══════════════════════════════════════════════════
+         EXECUTION PAGE — selalu mulai halaman baru
+         Tidak bisa terpotong dalam kondisi apapun
+    ════════════════════════════════════════════════════ -->
+    <div style="
+      page-break-before: always;
+      break-before: page;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      border: 1.5px solid #000;
+      border-radius: 4px;
+      padding: 24px;
+      margin-top: 0;
+    ">
 
-    <table style="width: 100%; text-align: center; border-collapse: collapse; margin-top: 10px;">
-      <tr>
-        <td style="width: 50%; padding: 10px;"><strong>PIHAK PERTAMA (KLIEN)</strong></td>
-        <td style="width: 50%; padding: 10px;"><strong>PIHAK KEDUA (DEVELOPER)</strong></td>
-      </tr>
-      <tr>
-        <!-- TTD KLIEN -->
-        <td style="height: 140px; vertical-align: bottom; padding: 10px;">
-          <div style="height: 100px; border: 2px dashed #cbd5e0; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; background-color: #f8fafc;">
-            <img v-if="c.signature_klien" :src="c.signature_klien"
-              style="max-height: 80px; margin: 0 auto; display: block;" />
-            <span v-else style="color: #718096; font-size: 0.875rem; font-style: italic;">
-              Belum ditandatangani
-            </span>
-          </div>
-          <strong>{{ c.namaKlien }}</strong><br>
-          {{ c.jabatanKlien }}
-        </td>
-        <!-- TTD DEVELOPER -->
-        <td style="height: 140px; vertical-align: bottom; padding: 10px;">
-          <div style="height: 100px; border: 2px dashed #cbd5e0; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; background-color: #f8fafc;">
-            <img v-if="c.signature_dev" :src="c.signature_dev"
-              style="max-height: 80px; margin: 0 auto; display: block;" />
-            <span v-else style="color: #718096; font-size: 0.875rem; font-style: italic;">
-              Belum ditandatangani
-            </span>
-          </div>
-          <strong>{{ c.namaDev }}</strong><br>
-          Fullstack Developer
-        </td>
-      </tr>
-    </table>
+      <!-- Judul execution page -->
+      <h3 style="text-align: center; font-size: 12pt; font-weight: bold; margin: 0 0 4px;">
+        HALAMAN PENANDATANGANAN
+      </h3>
+      <p style="text-align: center; font-size: 9.5pt; color: #555; margin: 0 0 16px;">
+        Halaman ini merupakan bagian tidak terpisahkan dari Perjanjian Kerjasama<br>
+        Nomor: <strong>{{ c.nomorSurat }}</strong>
+      </p>
+
+      <hr style="border: 0; border-top: 1px solid #000; margin: 0 0 14px;">
+
+      <!-- Pernyataan persetujuan -->
+      <p style="font-size: 10pt; margin: 0 0 8px;">
+        Dengan menandatangani dokumen ini, kedua belah pihak menyatakan telah
+        <strong>membaca, memahami, dan menyetujui</strong> seluruh isi Perjanjian
+        Kerjasama ini secara sadar dan tanpa paksaan dari pihak manapun.
+      </p>
+
+      <!-- Ringkasan pasal -->
+      <ul style="font-size: 9.5pt; color: #333; margin: 8px 0 14px; padding-left: 18px; line-height: 1.8;">
+        <li>Ruang lingkup pekerjaan dan biaya sesuai Rate Card yang tercantum pada <strong>Pasal 1</strong>.</li>
+        <li>Kewajiban masing-masing pihak sesuai <strong>Pasal 2</strong>.</li>
+        <li>Kerahasiaan informasi sesuai <strong>Pasal 3</strong> (NDA).</li>
+        <li>Hak kekayaan intelektual sesuai <strong>Pasal 4</strong>.</li>
+        <li>Sistem pembayaran sesuai <strong>Pasal 5</strong>.</li>
+        <li>Masa berlaku <strong>{{ c.jangkaWaktu }}</strong> dengan garansi 30 hari sesuai <strong>Pasal 6</strong>.</li>
+        <li>Penyelesaian perselisihan di Pengadilan Negeri <strong>{{ c.pengadilan }}</strong> sesuai <strong>Pasal 7</strong>.</li>
+      </ul>
+
+      <hr style="border: 0; border-top: 1px solid #000; margin: 0 0 14px;">
+
+      <!-- Lokasi dan tanggal -->
+      <p style="font-size: 10pt; margin: 0 0 18px;">
+        Ditandatangani di: <strong>{{ c.lokasi }}</strong> &nbsp;|&nbsp;
+        Tanggal: <strong>{{ c.tanggal }} {{ c.bulan }} {{ c.tahun }}</strong>
+      </p>
+
+      <!-- Area TTD -->
+      <table style="width: 100%; text-align: center; border-collapse: collapse;">
+        <tr>
+          <td style="width: 50%; padding: 6px 16px;">
+            <p style="font-size: 10pt; font-weight: bold; margin: 0 0 2px;">PIHAK PERTAMA (KLIEN)</p>
+            <p style="font-size: 9.5pt; color: #555; margin: 0 0 8px;">Pemberi Kerja</p>
+            <div style="
+              height: 110px;
+              border: 1.5px solid #94a3b8;
+              border-radius: 6px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: #f8fafc;
+              margin-bottom: 10px;
+            ">
+              <img v-if="c.signature_klien" :src="c.signature_klien"
+                style="max-height: 90px; max-width: 90%; object-fit: contain;" />
+              <span v-else style="color: #94a3b8; font-size: 9pt; font-style: italic;">
+                Tanda Tangan
+              </span>
+            </div>
+            <div style="border-top: 1px solid #000; padding-top: 6px;">
+              <p style="font-weight: bold; font-size: 10.5pt; margin: 0;">{{ c.namaKlien }}</p>
+              <p style="font-size: 9.5pt; color: #444; margin: 2px 0 0;">{{ c.jabatanKlien }}</p>
+            </div>
+          </td>
+
+          <td style="width: 50%; padding: 6px 16px;">
+            <p style="font-size: 10pt; font-weight: bold; margin: 0 0 2px;">PIHAK KEDUA (DEVELOPER)</p>
+            <p style="font-size: 9.5pt; color: #555; margin: 0 0 8px;">Penyedia Jasa</p>
+            <div style="
+              height: 110px;
+              border: 1.5px solid #94a3b8;
+              border-radius: 6px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: #f8fafc;
+              margin-bottom: 10px;
+            ">
+              <img v-if="c.signature_dev" :src="c.signature_dev"
+                style="max-height: 90px; max-width: 90%; object-fit: contain;" />
+              <span v-else style="color: #94a3b8; font-size: 9pt; font-style: italic;">
+                Tanda Tangan
+              </span>
+            </div>
+            <div style="border-top: 1px solid #000; padding-top: 6px;">
+              <p style="font-weight: bold; font-size: 10.5pt; margin: 0;">{{ c.namaDev }}</p>
+              <p style="font-size: 9.5pt; color: #444; margin: 2px 0 0;">Fullstack Web Developer</p>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Footer legal -->
+      <div style="
+        margin-top: 20px;
+        padding-top: 10px;
+        border-top: 1px dashed #cbd5e0;
+        text-align: center;
+      ">
+        <p style="font-size: 8.5pt; color: #94a3b8; margin: 0;">
+          Dokumen ini sah secara hukum apabila ditandatangani oleh kedua belah pihak.
+          Dibuat dalam 1 (satu) rangkap digital yang memiliki kekuatan hukum yang sama.
+        </p>
+      </div>
+
+    </div>
+    <!-- END EXECUTION PAGE -->
 
   </div>
 </template>

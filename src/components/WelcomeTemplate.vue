@@ -79,7 +79,7 @@
     <table style="width: 100%; border-collapse: collapse; margin-top: 12px; margin-bottom: 16px; font-size: 10.5pt;">
       <thead>
         <tr style="background-color: #edf2f7; text-align: left;">
-          <th style="padding: 10px; border: 1px solid #cbd5e0; width: 18%;">Kategori Bug</th>
+          <th style="padding: 10px; border: 1px solid #cbd5e0; width: 18%;">Kategori</th>
           <th style="padding: 10px; border: 1px solid #cbd5e0; width: 50%;">Deskripsi & Kriteria</th>
           <th style="padding: 10px; border: 1px solid #cbd5e0; width: 32%;">Estimasi Biaya</th>
         </tr>
@@ -92,79 +92,184 @@
         </tr>
         <tr style="background-color: #f7fafc;">
           <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 2: Minor</strong></td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">Perbaikan logika sederhana, pencegahan error null, validasi input, perbaikan notifikasi (WA/Email).</td>
+          <td style="padding: 10px; border: 1px solid #cbd5e0;">Perbaikan logika sederhana, pencegahan error null, validasi input.</td>
           <td style="padding: 10px; border: 1px solid #cbd5e0;">{{ c.tier2 }}</td>
         </tr>
         <tr>
           <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 3: Major</strong></td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">Perbaikan alur bisnis (flow), optimasi query database, integrasi API pihak ketiga (Wablas, dll).</td>
+          <td style="padding: 10px; border: 1px solid #cbd5e0;">Perbaikan alur bisnis, optimasi database, integrasi API pihak ketiga.</td>
           <td style="padding: 10px; border: 1px solid #cbd5e0;">{{ c.tier3 }}</td>
         </tr>
         <tr style="background-color: #f7fafc;">
           <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 4: Critical</strong></td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">Sistem mati (down), kebocoran data, atau fitur utama tidak dapat digunakan.</td>
+          <td style="padding: 10px; border: 1px solid #cbd5e0;">Sistem mati (down), kebocoran data, fitur utama tidak berfungsi.</td>
           <td style="padding: 10px; border: 1px solid #cbd5e0; color: #c53030;"><strong>{{ c.tier4 }}</strong></td>
         </tr>
       </tbody>
     </table>
 
-    <!-- 5. PAKET RETAINER -->
+    <!-- 5. PAKET RETAINER — DINAMIS -->
     <h3 style="color: #2b6cb0; font-size: 13pt; font-weight: bold; margin-top: 20px;">
       5. Paket Pemeliharaan Rutin (Monthly Retainer)
     </h3>
-    <p>Cocok untuk sistem yang membutuhkan pemantauan proaktif secara berkala.</p>
-    <ul style="margin-top: 5px; margin-bottom: 10px;">
-      <li style="margin-bottom: 8px;">
-        <strong>Paket Basic Standby (Rp 1.500.000 / bln):</strong>
-        Monitoring Server &amp; Error Log. Pengecekan Uptime rutin.
-        Gratis 2 Tiket Perbaikan Tier 1.
-      </li>
-      <li style="margin-bottom: 8px;">
-        <strong>Paket Standard Support (Rp 3.000.000 / bln):</strong>
-        Monitoring Proaktif &amp; Optimasi Database.
-        Gratis 3 Tiket Tier 1 &amp; 1 Tiket Tier 2.
-      </li>
-      <li style="margin-bottom: 8px;">
-        <strong>Paket Professional (Custom):</strong>
-        Prioritas pengerjaan &lt; 24 jam.
-        Penanganan Critical Bug &amp; Konsultasi Pengembangan Fitur.
-      </li>
-    </ul>
+    <p>
+      Harga paket dihitung secara transparan berdasarkan nilai tiket yang berlaku,
+      dengan diskon komitmen untuk berlangganan bulanan.
+    </p>
 
-    <!-- 6. ALUR KERJA SAMA -->
+    <!-- Tabel perbandingan paket -->
+    <table style="width: 100%; border-collapse: collapse; margin-top: 12px; margin-bottom: 8px; font-size: 10pt;">
+      <thead>
+        <tr style="background-color: #4338ca; color: #fff; text-align: left;">
+          <th style="padding: 10px; border: 1px solid #4338ca; width: 28%;">Komponen</th>
+          <th style="padding: 10px; border: 1px solid #818cf8; width: 24%; text-align: center;">
+            Basic Standby
+          </th>
+          <th style="padding: 10px; border: 1px solid #818cf8; width: 24%; text-align: center;">
+            Standard Support
+          </th>
+          <th style="padding: 10px; border: 1px solid #818cf8; width: 24%; text-align: center;">
+            Professional
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Monitoring & Uptime</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">✓</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">✓</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">✓</td>
+        </tr>
+        <tr style="background-color: #f7fafc;">
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Tiket Tier 1</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">3 tiket</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">5 tiket</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold;">Unlimited</td>
+        </tr>
+        <tr>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Tiket Tier 2</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">1 tiket</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">2 tiket</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold;">Unlimited</td>
+        </tr>
+        <tr style="background-color: #f7fafc;">
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Tiket Tier 3</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #94a3b8;">—</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">1 tiket</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold;">Unlimited</td>
+        </tr>
+        <tr>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Tier 4 (Critical)</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; color: #c53030;">Tagih terpisah</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; color: #c53030;">Tagih terpisah</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; color: #c53030;">Diskon 15%</td>
+        </tr>
+        <tr style="background-color: #f7fafc;">
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Response Time</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt;">2–3 hari kerja</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt;">1–2 hari kerja</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; font-weight: bold;">&lt; 24 jam</td>
+        </tr>
+        <tr>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Rollover Tiket</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt;">Max 1 bulan</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt;">Max 1 bulan</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt;">—</td>
+        </tr>
+        <tr>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Konsultasi Fitur</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #94a3b8;">—</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #94a3b8;">—</td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">✓</td>
+        </tr>
+
+        <!-- BARIS NILAI ASLI -->
+        <tr style="background-color: #fef9c3;">
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; font-weight: bold; font-size: 9.5pt;">
+            Nilai Asli (jika beli satuan)
+          </td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold; font-size: 9.5pt; color: #92400e;">
+            {{ fmt(paket.basic.nilaiAsli) }}
+          </td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold; font-size: 9.5pt; color: #92400e;">
+            {{ fmt(paket.standard.nilaiAsli) }}
+          </td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold; font-size: 9.5pt; color: #92400e;">
+            {{ fmt(paket.professional.nilaiAsli) }}+
+          </td>
+        </tr>
+
+        <!-- BARIS HARGA PAKET -->
+        <tr style="background-color: #4338ca; color: #fff;">
+          <td style="padding: 11px 10px; border: 1px solid #4338ca; font-weight: bold;">
+            Harga Paket / bulan
+          </td>
+          <td style="padding: 11px 10px; border: 1px solid #818cf8; text-align: center; font-weight: bold; font-size: 11pt;">
+            {{ fmt(paket.basic.harga) }}
+          </td>
+          <td style="padding: 11px 10px; border: 1px solid #818cf8; text-align: center; font-weight: bold; font-size: 11pt;">
+            {{ fmt(paket.standard.harga) }}
+          </td>
+          <td style="padding: 11px 10px; border: 1px solid #818cf8; text-align: center; font-weight: bold; font-size: 11pt;">
+            {{ fmt(paket.professional.harga) }}
+          </td>
+        </tr>
+
+        <!-- BARIS HEMAT -->
+        <tr style="background-color: #f0fdf4;">
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #166534; font-weight: bold; font-size: 9.5pt;">
+            Klien hemat
+          </td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #166534; font-weight: bold;">
+            {{ fmt(paket.basic.hemat) }} (~{{ paket.basic.diskon }}%)
+          </td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #166534; font-weight: bold;">
+            {{ fmt(paket.standard.hemat) }} (~{{ paket.standard.diskon }}%)
+          </td>
+          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #166534; font-weight: bold;">
+            {{ fmt(paket.professional.hemat) }} (~{{ paket.professional.diskon }}%)
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Catatan transparansi -->
+    <div style="background: #eff6ff; border-left: 3px solid #3b82f6; padding: 10px 14px; border-radius: 4px; margin-bottom: 16px; font-size: 9.5pt; color: #1e40af;">
+      <strong>Catatan transparansi:</strong> Harga paket dihitung dari nilai minimum tiket yang berlaku.
+      Jika tier berubah di masa mendatang, harga paket akan disesuaikan dengan pemberitahuan 30 hari sebelumnya.
+    </div>
+
+    <!-- 6. ALUR KERJA -->
     <h3 style="color: #2b6cb0; font-size: 13pt; font-weight: bold; margin-top: 20px;">
       6. Alur Kerja Sama
     </h3>
     <ol style="margin-top: 5px; margin-bottom: 10px;">
-      <li style="margin-bottom: 6px;">
-        <strong>Laporan Kendala:</strong> Klien mengirimkan detail bug atau isu yang ditemukan.
-      </li>
-      <li style="margin-bottom: 6px;">
-        <strong>Analisa &amp; Tiering:</strong> Saya melakukan pengecekan singkat untuk
-        menentukan kategori Tier dan estimasi biaya.
-      </li>
-      <li style="margin-bottom: 6px;">
-        <strong>Konfirmasi &amp; Eksekusi:</strong> Pengerjaan dimulai setelah persetujuan
-        (atau menggunakan kuota paket bulanan).
-      </li>
-      <li style="margin-bottom: 6px;">
-        <strong>Laporan Selesai:</strong> Penyerahan hasil kerja disertai laporan teknis
-        dan pengetesan.
-      </li>
+      <li style="margin-bottom: 6px;"><strong>Laporan Kendala:</strong> Klien mengirimkan detail bug atau isu yang ditemukan.</li>
+      <li style="margin-bottom: 6px;"><strong>Analisa &amp; Tiering:</strong> Saya melakukan pengecekan singkat untuk menentukan kategori Tier dan estimasi biaya.</li>
+      <li style="margin-bottom: 6px;"><strong>Konfirmasi &amp; Eksekusi:</strong> Pengerjaan dimulai setelah persetujuan (atau menggunakan kuota paket bulanan).</li>
+      <li style="margin-bottom: 6px;"><strong>Laporan Selesai:</strong> Penyerahan hasil kerja disertai laporan teknis dan pengetesan.</li>
     </ol>
 
     <!-- 7. GARANSI -->
     <h3 style="color: #2b6cb0; font-size: 13pt; font-weight: bold; margin-top: 20px;">
-      7. Kebijakan Garansi 30 Hari
+      7. Kebijakan Garansi & Rollover
     </h3>
     <p>
-      Setiap pekerjaan yang saya selesaikan dilindungi oleh <strong>Masa Garansi &amp;
-      Standby selama 30 Hari</strong>. Jika dalam kurun waktu tersebut ditemukan kendala
-      pada fitur yang baru saja diperbaiki, saya akan melakukan penanganan kembali tanpa
-      biaya tambahan.
+      Setiap pekerjaan dilindungi <strong>Masa Garansi 30 Hari</strong> sejak serah terima.
+      Kendala pada fitur yang baru diperbaiki ditangani tanpa biaya tambahan.
+    </p>
+    <p style="margin-top: 8px;">
+      <strong>Klausul Rollover Tiket:</strong> Sisa tiket yang tidak terpakai dapat
+      diakumulasikan maksimal 1 bulan berikutnya. Tiket tidak digunakan setelah
+      2 bulan berturut-turut dianggap hangus dan tidak dapat diuangkan kembali.
+    </p>
+    <p style="margin-top: 8px;">
+      <strong>Klausul Freeze:</strong> Apabila tidak ada permintaan selama 2 bulan
+      berturut-turut, PIHAK KEDUA berhak mengajukan evaluasi ulang kontrak atau
+      mengalihkan slot prioritas ke klien lain.
     </p>
 
-    <!-- INFO PEMBAYARAN -->
+    <!-- 8. PEMBAYARAN -->
     <h3 style="color: #2b6cb0; font-size: 13pt; font-weight: bold; margin-top: 20px;">
       8. Info Pembayaran
     </h3>
@@ -202,7 +307,58 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
   c: { type: Object, required: true }
 })
+
+// Ambil harga tier dari Firestore (atau fallback default)
+const th = computed(() => props.c.tierHarga ?? {
+  tier1: 200000, tier2: 400000, tier3: 1000000, tier4: 2500000, monitoring: 400000
+})
+
+// Override manual dari owner (jika ada)
+const ov = computed(() => props.c.welcomeData?.overridePaket ?? {
+  basic: null, standard: null, professional: null
+})
+
+// Kalkulasi otomatis tiap paket dari nilai minimum tier
+const paket = computed(() => {
+  const t = th.value
+
+  // BASIC: monitoring + 3x T1 + 1x T2
+  const basicNilai  = t.monitoring + (3 * t.tier1) + (1 * t.tier2)
+  const basicHarga  = ov.value.basic ?? bulatkan(basicNilai * 0.80) // diskon 20%
+  const basicHemat  = basicNilai - basicHarga
+  const basicDiskon = Math.round((basicHemat / basicNilai) * 100)
+
+  // STANDARD: monitoring + 5x T1 + 2x T2 + 1x T3
+  const stdNilai  = t.monitoring + (5 * t.tier1) + (2 * t.tier2) + (1 * t.tier3)
+  const stdHarga  = ov.value.standard ?? bulatkan(stdNilai * 0.65) // diskon 35%
+  const stdHemat  = stdNilai - stdHarga
+  const stdDiskon = Math.round((stdHemat / stdNilai) * 100)
+
+  // PROFESSIONAL: monitoring + 8x T1 + 4x T2 + 2x T3 (unlimited dikira kuota besar)
+  const proNilai  = t.monitoring + (8 * t.tier1) + (4 * t.tier2) + (2 * t.tier3)
+  const proHarga  = ov.value.professional ?? bulatkan(proNilai * 0.60) // diskon 40%
+  const proHemat  = proNilai - proHarga
+  const proDiskon = Math.round((proHemat / proNilai) * 100)
+
+  return {
+    basic:        { nilaiAsli: basicNilai, harga: basicHarga, hemat: basicHemat, diskon: basicDiskon },
+    standard:     { nilaiAsli: stdNilai,   harga: stdHarga,   hemat: stdHemat,   diskon: stdDiskon },
+    professional: { nilaiAsli: proNilai,   harga: proHarga,   hemat: proHemat,   diskon: proDiskon },
+  }
+})
+
+// Bulatkan ke kelipatan 50.000 terdekat (lebih rapi untuk harga)
+function bulatkan(angka) {
+  return Math.ceil(angka / 50000) * 50000
+}
+
+// Format Rupiah
+function fmt(angka) {
+  return 'Rp ' + angka.toLocaleString('id-ID')
+}
 </script>
