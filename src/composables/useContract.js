@@ -4,10 +4,59 @@ import { currentUser } from '@/composables/useAuth'
 import {
   createContract,
   updateContract,
+  fetchByWelcomeToken,
   listenContract,
   listenMyContracts,
   fetchByToken
 } from '@/services/contractService'
+
+
+// ── Untuk owner: edit welcome packet ──
+export function useWelcomeEditor(contractId) {
+  const contract = ref(null)
+  const loading  = ref(true)
+  const saving   = ref(false)
+
+  const unsub = listenContract(contractId, (data) => {
+    contract.value = data
+    loading.value  = false
+  })
+
+  onUnmounted(unsub)
+
+  async function saveWelcome(welcomeData) {
+    saving.value = true
+    await updateContract(contractId, { welcomeData })
+    saving.value = false
+  }
+
+  return { contract, loading, saving, saveWelcome }
+}
+
+// ── Untuk klien: baca welcome via welcomeToken ──
+export function useWelcomeView(token) {
+  const contract = ref(null)
+  const loading  = ref(true)
+  const error    = ref(null)
+  let   unsub    = () => {}
+
+  fetchByWelcomeToken(token)
+    .then((data) => {
+      contract.value = data
+      loading.value  = false
+      unsub = listenContract(data.id, (updated) => {
+        contract.value = updated
+      })
+    })
+    .catch((e) => {
+      error.value   = e.message
+      loading.value = false
+    })
+
+  onUnmounted(() => unsub())
+
+  return { contract, loading, error }
+}
 
 // ── Untuk owner: satu kontrak yang sedang dibuka ──
 export function useContractEditor(contractId) {

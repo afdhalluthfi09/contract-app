@@ -24,14 +24,18 @@ const routes = [
     meta: { requiresOwner: true }
   },
   {
-    // Link yang dikirim ke klien: /sign/TOKEN
     path: '/sign/:token',
     component: () => import('@/views/ClientSignView.vue'),
   },
   {
+    path: '/welcome/:token',
+    component: () => import('@/views/WelcomeView.vue'),
+  },
+  // ⚠️ catch-all WAJIB paling bawah
+  {
     path: '/:pathMatch(.*)*',
     redirect: '/dashboard'
-  }
+  },
 ]
 
 const router = createRouter({

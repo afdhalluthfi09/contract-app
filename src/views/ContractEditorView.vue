@@ -4,8 +4,8 @@
 
     <div v-else class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
 
-      <!-- FORM KIRI -->
-      <div class="bg-white rounded-2xl shadow p-6 space-y-4 h-fit">
+      <!-- KOLOM KIRI: FORM -->
+      <div class="bg-white rounded-2xl shadow p-6 space-y-4 h-fit sticky top-4">
         <div class="flex items-center justify-between mb-2">
           <h2 class="font-bold text-gray-800">Edit Kontrak</h2>
           <button @click="router.back()" class="text-sm text-gray-400 hover:text-gray-600">← Kembali</button>
@@ -16,6 +16,19 @@
           <input v-model="form[field.key]" @change="save(field.key)"
             class="w-full border rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
         </div>
+
+        <!-- Tambahkan setelah div share link yang sudah ada -->
+<div class="mt-3 p-3 bg-indigo-50 rounded-lg border border-indigo-200">
+  <p class="text-xs text-indigo-700 font-medium mb-2">Link Welcome Packet untuk klien:</p>
+  <div class="flex gap-2">
+    <input :value="welcomeUrl" readonly
+      class="flex-1 text-xs border rounded p-2 bg-white text-gray-600" />
+    <button @click="copyWelcomeLink"
+      class="text-xs bg-indigo-600 text-white px-3 rounded-lg hover:bg-indigo-700 transition">
+      {{ copiedWelcome ? '✓' : 'Copy' }}
+    </button>
+  </div>
+</div>
 
         <!-- Share link -->
         <div class="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
@@ -29,38 +42,76 @@
             </button>
           </div>
         </div>
+
+        <!-- STATUS BADGE -->
+        <div class="flex items-center justify-between pt-2 border-t">
+          <span class="text-xs text-gray-500">Status kontrak</span>
+          <span :class="statusClass" class="text-xs font-medium px-3 py-1 rounded-full">
+            {{ statusLabel }}
+          </span>
+        </div>
+
+        <!-- TTD DEVELOPER (di sini, bukan di kolom kanan) -->
+        <div class="pt-2 border-t">
+          <h3 class="text-sm font-semibold text-gray-700 mb-3">Tanda Tangan Developer (Kamu)</h3>
+          <SignatureCanvas
+            :existing-signature="contract?.signature_dev"
+            :signer-name="contract?.namaDev || 'Developer'"
+            :locked="!!contract?.signature_dev"
+            @save="handleSaveDevSignature"
+          />
+        </div>
+
+        <!-- TOMBOL TTD KLIEN (read-only preview) -->
+        <div class="pt-2 border-t">
+          <h3 class="text-sm font-semibold text-gray-700 mb-3">Tanda Tangan Klien</h3>
+          <div v-if="contract?.signature_klien" class="text-center">
+            <img :src="contract.signature_klien" class="max-h-20 mx-auto" />
+            <p class="text-xs text-green-600 mt-2">✓ Klien sudah menandatangani</p>
+          </div>
+          <div v-else
+            class="h-20 border-2 border-dashed rounded-xl flex items-center justify-center text-gray-400 text-sm">
+            Menunggu TTD klien...
+          </div>
+        </div>
+
+        <!-- DOWNLOAD PDF (hanya jika completed) -->
+        <button
+          v-if="contract?.status === 'completed'"
+          @click="downloadPDF"
+          class="w-full bg-green-600 text-white py-3 rounded-xl font-medium hover:bg-green-700 transition">
+          ↓ Download PDF Kontrak
+        </button>
       </div>
 
-      <!-- PREVIEW + TTD KANAN -->
-      
-        <div class="bg-white rounded-2xl shadow overflow-hidden">
-        <div class="bg-gray-800 px-4 py-2 flex items-center justify-between">
-            <span class="text-white text-sm font-mono">Preview Kontrak</span>
-            <span
-            :class="statusClass"
-            class="text-xs font-bold px-2 py-0.5 rounded"
-            >
+      <!-- KOLOM KANAN: PREVIEW DOKUMEN -->
+      <div class="bg-white rounded-2xl shadow overflow-hidden">
+        <div class="bg-gray-800 px-4 py-2 flex items-center justify-between sticky top-0 z-10">
+          <span class="text-white text-sm font-mono">Preview Kontrak</span>
+          <span :class="statusClass" class="text-xs font-bold px-2 py-0.5 rounded">
             {{ statusLabel }}
-            </span>
+          </span>
         </div>
         <div class="bg-gray-200 p-3 overflow-x-auto">
-            <div id="documentToPrint"
+          <div
+            id="documentToPrint"
             class="bg-white shadow-sm mx-auto"
             style="width: 100%; max-width: 210mm; min-height: 297mm; padding: 15mm;">
             <ContractTemplate v-if="contract" :c="contract" />
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
-import ContractTemplate from '@/components/ContractTemplate.vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useContractEditor } from '@/composables/useContract'
+import ContractTemplate from '@/components/ContractTemplate.vue'
 import SignatureCanvas from '@/components/SignatureCanvas.vue'
+import { useContractEditor } from '@/composables/useContract'
 
 const route  = useRoute()
 const router = useRouter()
@@ -77,14 +128,37 @@ const fields = [
   { key: 'nomorSurat',   label: 'Nomor Surat' },
   { key: 'namaKlien',    label: 'Nama Klien' },
   { key: 'jabatanKlien', label: 'Jabatan Klien' },
-  { key: 'namaKlien',    label: 'Nama Klien' },
   { key: 'namaDev',      label: 'Nama Developer' },
+  { key: 'alamatDev',    label: 'Alamat Developer' },
+  { key: 'alamatKlien',  label: 'Alamat Klien' },
+  { key: 'hari',         label: 'Hari' },
+  { key: 'tanggal',      label: 'Tanggal' },
+  { key: 'bulan',        label: 'Bulan' },
+  { key: 'tahun',        label: 'Tahun' },
+  { key: 'lokasi',       label: 'Lokasi / Kota' },
+  { key: 'jangkaWaktu',  label: 'Masa Berlaku' },
   { key: 'tier1',        label: 'Biaya Tier 1' },
   { key: 'tier2',        label: 'Biaya Tier 2' },
   { key: 'tier3',        label: 'Biaya Tier 3' },
   { key: 'tier4',        label: 'Biaya Tier 4' },
-  { key: 'jangkaWaktu',  label: 'Masa Berlaku' },
+  { key: 'paket',        label: 'Paket Retainer' },
+  { key: 'namaBank',     label: 'Nama Bank' },
+  { key: 'noRek',        label: 'No. Rekening' },
+  { key: 'atasNama',     label: 'Atas Nama' },
+  { key: 'pengadilan',   label: 'Pengadilan Negeri' },
 ]
+
+const copiedWelcome = ref(false)
+
+const welcomeUrl = computed(() =>
+  contract.value ? `${window.location.origin}/welcome/${contract.value.welcomeToken}` : ''
+)
+
+async function copyWelcomeLink() {
+  await navigator.clipboard.writeText(welcomeUrl.value)
+  copiedWelcome.value = true
+  setTimeout(() => copiedWelcome.value = false, 2000)
+}
 
 async function save(key) {
   await saveField({ [key]: form.value[key] })
@@ -96,8 +170,15 @@ async function copyLink() {
   setTimeout(() => copied.value = false, 2000)
 }
 
+// Wrapper agar bisa dipanggil dari @save event SignatureCanvas
+async function handleSaveDevSignature(base64) {
+  await saveDevSignature(base64)
+}
+
 const statusLabel = computed(() => ({
-  draft: 'Draft', waiting_sign: 'Menunggu TTD', completed: 'Selesai ✓'
+  draft:        'Draft',
+  waiting_sign: 'Menunggu TTD',
+  completed:    'Selesai ✓',
 }[contract.value?.status] || '-'))
 
 const statusClass = computed(() => ({
@@ -106,7 +187,6 @@ const statusClass = computed(() => ({
   completed:    'bg-green-100 text-green-700',
 }[contract.value?.status]))
 
-// SESUDAH
 async function downloadPDF() {
   window.print()
 }
