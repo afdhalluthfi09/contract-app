@@ -93,62 +93,64 @@
       Biaya perbaikan ditentukan berdasarkan kompleksitas investigasi dan dampak
       perbaikan pada sistem.
     </p>
-    <table style="width: 100%; border-collapse: collapse; margin-top: 12px; margin-bottom: 8px; font-size: 10.5pt;">
-      <thead>
-        <tr style="background-color: #edf2f7; text-align: left;">
-          <th style="padding: 10px; border: 1px solid #cbd5e0; width: 18%;">Kategori</th>
-          <th style="padding: 10px; border: 1px solid #cbd5e0; width: 50%;">Deskripsi & Kriteria</th>
-          <th style="padding: 10px; border: 1px solid #cbd5e0; width: 32%;">Estimasi Biaya</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 1: Trivial</strong></td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">
-            Perubahan UI, teks, aset statis, CSS ringan, dan typo pada pesan/label
-            yang tidak mempengaruhi logika sistem.
-          </td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">{{ c.tier1 }}</td>
-        </tr>
-        <tr style="background-color: #f7fafc;">
-          <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 2: Minor</strong></td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">
-            Perbaikan logika sederhana, validasi input, konfigurasi API pihak ketiga,
-            perbaikan urutan eksekusi fungsi, dan perbaikan response/status code
-            yang menyebabkan perilaku tidak sesuai ekspektasi.
-          </td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">{{ c.tier2 }}</td>
-        </tr>
-        <tr>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 3: Major</strong></td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">
-            Perbaikan alur bisnis lintas modul, optimasi database, redesign arsitektur
-            integrasi API, penanganan race condition, dan perbaikan yang berdampak
-            pada integritas data secara luas.
-          </td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">{{ c.tier3 }}</td>
-        </tr>
-        <tr style="background-color: #f7fafc;">
-          <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 4: Critical</strong></td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">
-            Sistem tidak dapat digunakan (down), kebocoran atau kerusakan data,
-            celah keamanan aktif yang sedang dieksploitasi.
-          </td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0; color: #c53030;"><strong>{{ c.tier4 }}</strong></td>
-        </tr>
-        <tr>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Diagnostic Fee</strong></td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">
-            Investigasi yang hasilnya bukan dari sistem yang dikerjakan (gangguan
-            pihak ketiga, kesalahan end-user, atau by design). Dikenakan biaya
-            investigasi setara Tier 1.
-          </td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0; color: #718096;">
-            Setara Tier 1
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; margin-top: 12px; margin-bottom: 8px; font-size: 10.5pt;">
+        <thead>
+          <tr style="background-color: #edf2f7; text-align: left;">
+            <th style="padding: 10px; border: 1px solid #cbd5e0; width: 18%;">Kategori</th>
+            <th style="padding: 10px; border: 1px solid #cbd5e0; width: 50%;">Deskripsi & Kriteria</th>
+            <th style="padding: 10px; border: 1px solid #cbd5e0; width: 32%;">Estimasi Biaya</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 1: Trivial</strong></td>
+            <td style="padding: 10px; border: 1px solid #cbd5e0;">
+              Perubahan UI, teks, aset statis, CSS ringan, dan typo pada pesan/label
+              yang tidak mempengaruhi logika sistem.
+            </td>
+            <td style="padding: 10px; border: 1px solid #cbd5e0;">{{ c.tier1 }}</td>
+          </tr>
+          <tr style="background-color: #f7fafc;">
+            <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 2: Minor</strong></td>
+            <td style="padding: 10px; border: 1px solid #cbd5e0;">
+              Perbaikan logika sederhana, validasi input, konfigurasi API pihak ketiga,
+              perbaikan urutan eksekusi fungsi, dan perbaikan response/status code
+              yang menyebabkan perilaku tidak sesuai ekspektasi.
+            </td>
+            <td style="padding: 10px; border: 1px solid #cbd5e0;">{{ c.tier2 }}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 3: Major</strong></td>
+            <td style="padding: 10px; border: 1px solid #cbd5e0;">
+              Perbaikan alur bisnis lintas modul, optimasi database, redesign arsitektur
+              integrasi API, penanganan race condition, dan perbaikan yang berdampak
+              pada integritas data secara luas.
+            </td>
+            <td style="padding: 10px; border: 1px solid #cbd5e0;">{{ c.tier3 }}</td>
+          </tr>
+          <tr style="background-color: #f7fafc;">
+            <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 4: Critical</strong></td>
+            <td style="padding: 10px; border: 1px solid #cbd5e0;">
+              Sistem tidak dapat digunakan (down), kebocoran atau kerusakan data,
+              celah keamanan aktif yang sedang dieksploitasi.
+            </td>
+            <td style="padding: 10px; border: 1px solid #cbd5e0; color: #c53030;"><strong>{{ c.tier4 }}</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Diagnostic Fee</strong></td>
+            <td style="padding: 10px; border: 1px solid #cbd5e0;">
+              Investigasi yang hasilnya bukan dari sistem yang dikerjakan (gangguan
+              pihak ketiga, kesalahan end-user, atau by design). Dikenakan biaya
+              investigasi setara Tier 1.
+            </td>
+            <td style="padding: 10px; border: 1px solid #cbd5e0; color: #718096;">
+              Setara Tier 1
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <!-- JAM OPERASIONAL & RESPONSE TIME -->
     <div style="background: #fffbeb; border-left: 3px solid #d97706; padding: 10px 14px; border-radius: 4px; margin: 0 0 16px; font-size: 9.5pt; color: #92400e;">
@@ -169,180 +171,181 @@
       Harga paket dihitung secara transparan berdasarkan nilai tiket yang berlaku —
       Anda bisa memverifikasi sendiri asal-usul setiap angka dari Rate Card di atas.
     </p>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; margin-top: 12px; margin-bottom: 8px; font-size: 10pt;">
+        <thead>
+          <tr style="background-color: #4338ca; color: #fff; text-align: left;">
+            <th style="padding: 10px; border: 1px solid #4338ca; width: 28%;">Komponen</th>
+            <th style="padding: 10px; border: 1px solid #818cf8; width: 24%; text-align: center;">Basic Standby</th>
+            <th style="padding: 10px; border: 1px solid #818cf8; width: 24%; text-align: center;">Standard Support</th>
+            <th style="padding: 10px; border: 1px solid #818cf8; width: 24%; text-align: center;">Professional</th>
+          </tr>
+        </thead>
+        <tbody>
 
-    <table style="width: 100%; border-collapse: collapse; margin-top: 12px; margin-bottom: 8px; font-size: 10pt;">
-      <thead>
-        <tr style="background-color: #4338ca; color: #fff; text-align: left;">
-          <th style="padding: 10px; border: 1px solid #4338ca; width: 28%;">Komponen</th>
-          <th style="padding: 10px; border: 1px solid #818cf8; width: 24%; text-align: center;">Basic Standby</th>
-          <th style="padding: 10px; border: 1px solid #818cf8; width: 24%; text-align: center;">Standard Support</th>
-          <th style="padding: 10px; border: 1px solid #818cf8; width: 24%; text-align: center;">Professional</th>
-        </tr>
-      </thead>
-      <tbody>
+          <!-- MONITORING -->
+          <tr>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">
+              Monitoring &amp; Uptime
+              <div style="font-size: 8.5pt; color: #94a3b8; margin-top: 2px;">Server uptime, error log, backup cek rutin</div>
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9.5pt;">
+              ✓ <span style="color: #64748b;">({{ fmt(th.monitoring) }})</span>
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9.5pt;">
+              ✓ <span style="color: #64748b;">({{ fmt(th.monitoring) }})</span>
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9.5pt;">
+              ✓ <span style="color: #64748b;">({{ fmt(th.monitoring) }})</span>
+            </td>
+          </tr>
 
-        <!-- MONITORING -->
-        <tr>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">
-            Monitoring &amp; Uptime
-            <div style="font-size: 8.5pt; color: #94a3b8; margin-top: 2px;">Server uptime, error log, backup cek rutin</div>
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9.5pt;">
-            ✓ <span style="color: #64748b;">({{ fmt(th.monitoring) }})</span>
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9.5pt;">
-            ✓ <span style="color: #64748b;">({{ fmt(th.monitoring) }})</span>
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9.5pt;">
-            ✓ <span style="color: #64748b;">({{ fmt(th.monitoring) }})</span>
-          </td>
-        </tr>
+          <!-- TIER 1 -->
+          <tr style="background-color: #f7fafc;">
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">
+              Tiket Tier 1
+              <div style="font-size: 8.5pt; color: #94a3b8; margin-top: 2px;">@ min. {{ fmt(th.tier1) }} / tiket</div>
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">
+              3 tiket
+              <div style="font-size: 8.5pt; color: #94a3b8;">= {{ fmt(3 * th.tier1) }}</div>
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">
+              5 tiket
+              <div style="font-size: 8.5pt; color: #94a3b8;">= {{ fmt(5 * th.tier1) }}</div>
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold;">
+              Priority Unlimited
+              <div style="font-size: 8.5pt; color: #94a3b8; font-weight: normal;">dalam slot prioritas</div>
+            </td>
+          </tr>
 
-        <!-- TIER 1 -->
-        <tr style="background-color: #f7fafc;">
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">
-            Tiket Tier 1
-            <div style="font-size: 8.5pt; color: #94a3b8; margin-top: 2px;">@ min. {{ fmt(th.tier1) }} / tiket</div>
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">
-            3 tiket
-            <div style="font-size: 8.5pt; color: #94a3b8;">= {{ fmt(3 * th.tier1) }}</div>
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">
-            5 tiket
-            <div style="font-size: 8.5pt; color: #94a3b8;">= {{ fmt(5 * th.tier1) }}</div>
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold;">
-            Priority Unlimited
-            <div style="font-size: 8.5pt; color: #94a3b8; font-weight: normal;">dalam slot prioritas</div>
-          </td>
-        </tr>
+          <!-- TIER 2 -->
+          <tr>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">
+              Tiket Tier 2
+              <div style="font-size: 8.5pt; color: #94a3b8; margin-top: 2px;">@ min. {{ fmt(th.tier2) }} / tiket</div>
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">
+              1 tiket
+              <div style="font-size: 8.5pt; color: #94a3b8;">= {{ fmt(1 * th.tier2) }}</div>
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">
+              2 tiket
+              <div style="font-size: 8.5pt; color: #94a3b8;">= {{ fmt(2 * th.tier2) }}</div>
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold;">
+              Priority Unlimited
+              <div style="font-size: 8.5pt; color: #94a3b8; font-weight: normal;">dalam slot prioritas</div>
+            </td>
+          </tr>
 
-        <!-- TIER 2 -->
-        <tr>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">
-            Tiket Tier 2
-            <div style="font-size: 8.5pt; color: #94a3b8; margin-top: 2px;">@ min. {{ fmt(th.tier2) }} / tiket</div>
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">
-            1 tiket
-            <div style="font-size: 8.5pt; color: #94a3b8;">= {{ fmt(1 * th.tier2) }}</div>
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">
-            2 tiket
-            <div style="font-size: 8.5pt; color: #94a3b8;">= {{ fmt(2 * th.tier2) }}</div>
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold;">
-            Priority Unlimited
-            <div style="font-size: 8.5pt; color: #94a3b8; font-weight: normal;">dalam slot prioritas</div>
-          </td>
-        </tr>
+          <!-- TIER 3 -->
+          <tr style="background-color: #f7fafc;">
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">
+              Tiket Tier 3
+              <div style="font-size: 8.5pt; color: #94a3b8; margin-top: 2px;">@ min. {{ fmt(th.tier3) }} / tiket</div>
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #94a3b8;">—</td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">
+              1 tiket
+              <div style="font-size: 8.5pt; color: #94a3b8;">= {{ fmt(1 * th.tier3) }}</div>
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold;">
+              Maks. 3 tiket
+              <div style="font-size: 8.5pt; color: #94a3b8; font-weight: normal;">= {{ fmt(3 * th.tier3) }}</div>
+            </td>
+          </tr>
 
-        <!-- TIER 3 -->
-        <tr style="background-color: #f7fafc;">
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">
-            Tiket Tier 3
-            <div style="font-size: 8.5pt; color: #94a3b8; margin-top: 2px;">@ min. {{ fmt(th.tier3) }} / tiket</div>
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #94a3b8;">—</td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">
-            1 tiket
-            <div style="font-size: 8.5pt; color: #94a3b8;">= {{ fmt(1 * th.tier3) }}</div>
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold;">
-            Maks. 3 tiket
-            <div style="font-size: 8.5pt; color: #94a3b8; font-weight: normal;">= {{ fmt(3 * th.tier3) }}</div>
-          </td>
-        </tr>
+          <!-- TIER 4 -->
+          <tr>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Tier 4 (Critical)</td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; color: #c53030;">Tagih terpisah</td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; color: #c53030;">Tagih terpisah</td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; color: #c53030;">Diskon 15%</td>
+          </tr>
 
-        <!-- TIER 4 -->
-        <tr>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Tier 4 (Critical)</td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; color: #c53030;">Tagih terpisah</td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; color: #c53030;">Tagih terpisah</td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; color: #c53030;">Diskon 15%</td>
-        </tr>
+          <!-- RESPONSE TIME -->
+          <tr style="background-color: #f7fafc;">
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">
+              Response Time
+              <div style="font-size: 8.5pt; color: #94a3b8; margin-top: 2px;">Senin–Jumat, 09:00–17:00</div>
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt;">2–3 hari kerja</td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt;">1–2 hari kerja</td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; font-weight: bold;">
+              &lt; 24 jam
+              <div style="font-size: 8pt; color: #c4b5fd; font-weight: normal;">termasuk darurat weekend</div>
+            </td>
+          </tr>
 
-        <!-- RESPONSE TIME -->
-        <tr style="background-color: #f7fafc;">
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">
-            Response Time
-            <div style="font-size: 8.5pt; color: #94a3b8; margin-top: 2px;">Senin–Jumat, 09:00–17:00</div>
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt;">2–3 hari kerja</td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt;">1–2 hari kerja</td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; font-weight: bold;">
-            &lt; 24 jam
-            <div style="font-size: 8pt; color: #c4b5fd; font-weight: normal;">termasuk darurat weekend</div>
-          </td>
-        </tr>
+          <!-- ROLLOVER -->
+          <tr>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Rollover Tiket</td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt;">Max 1 bulan</td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt;">Max 1 bulan</td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; color: #94a3b8;">—</td>
+          </tr>
 
-        <!-- ROLLOVER -->
-        <tr>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Rollover Tiket</td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt;">Max 1 bulan</td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt;">Max 1 bulan</td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-size: 9pt; color: #94a3b8;">—</td>
-        </tr>
+          <!-- KONSULTASI -->
+          <tr style="background-color: #f7fafc;">
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Konsultasi Fitur</td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #94a3b8;">—</td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #94a3b8;">—</td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">✓</td>
+          </tr>
 
-        <!-- KONSULTASI -->
-        <tr style="background-color: #f7fafc;">
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #555;">Konsultasi Fitur</td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #94a3b8;">—</td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #94a3b8;">—</td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center;">✓</td>
-        </tr>
+          <!-- NILAI ASLI -->
+          <tr style="background-color: #fef9c3;">
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; font-weight: bold; font-size: 9.5pt;">
+              Nilai Asli (jika beli satuan)
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold; font-size: 9.5pt; color: #92400e;">
+              {{ fmt(paket.basic.nilaiAsli) }}
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold; font-size: 9.5pt; color: #92400e;">
+              {{ fmt(paket.standard.nilaiAsli) }}
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold; font-size: 9.5pt; color: #92400e;">
+              {{ fmt(paket.professional.nilaiAsli) }}+
+            </td>
+          </tr>
 
-        <!-- NILAI ASLI -->
-        <tr style="background-color: #fef9c3;">
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; font-weight: bold; font-size: 9.5pt;">
-            Nilai Asli (jika beli satuan)
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold; font-size: 9.5pt; color: #92400e;">
-            {{ fmt(paket.basic.nilaiAsli) }}
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold; font-size: 9.5pt; color: #92400e;">
-            {{ fmt(paket.standard.nilaiAsli) }}
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; font-weight: bold; font-size: 9.5pt; color: #92400e;">
-            {{ fmt(paket.professional.nilaiAsli) }}+
-          </td>
-        </tr>
+          <!-- HARGA PAKET -->
+          <tr style="background-color: #4338ca; color: #fff;">
+            <td style="padding: 11px 10px; border: 1px solid #4338ca; font-weight: bold;">
+              Harga Paket / bulan
+            </td>
+            <td style="padding: 11px 10px; border: 1px solid #818cf8; text-align: center; font-weight: bold; font-size: 11pt;">
+              {{ fmt(paket.basic.harga) }}
+            </td>
+            <td style="padding: 11px 10px; border: 1px solid #818cf8; text-align: center; font-weight: bold; font-size: 11pt;">
+              {{ fmt(paket.standard.harga) }}
+            </td>
+            <td style="padding: 11px 10px; border: 1px solid #818cf8; text-align: center; font-weight: bold; font-size: 11pt;">
+              {{ fmt(paket.professional.harga) }}
+            </td>
+          </tr>
 
-        <!-- HARGA PAKET -->
-        <tr style="background-color: #4338ca; color: #fff;">
-          <td style="padding: 11px 10px; border: 1px solid #4338ca; font-weight: bold;">
-            Harga Paket / bulan
-          </td>
-          <td style="padding: 11px 10px; border: 1px solid #818cf8; text-align: center; font-weight: bold; font-size: 11pt;">
-            {{ fmt(paket.basic.harga) }}
-          </td>
-          <td style="padding: 11px 10px; border: 1px solid #818cf8; text-align: center; font-weight: bold; font-size: 11pt;">
-            {{ fmt(paket.standard.harga) }}
-          </td>
-          <td style="padding: 11px 10px; border: 1px solid #818cf8; text-align: center; font-weight: bold; font-size: 11pt;">
-            {{ fmt(paket.professional.harga) }}
-          </td>
-        </tr>
+          <!-- HEMAT -->
+          <tr style="background-color: #f0fdf4;">
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #166534; font-weight: bold; font-size: 9.5pt;">
+              Klien hemat
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #166534; font-weight: bold;">
+              {{ fmt(paket.basic.hemat) }} (~{{ paket.basic.diskon }}%)
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #166534; font-weight: bold;">
+              {{ fmt(paket.standard.hemat) }} (~{{ paket.standard.diskon }}%)
+            </td>
+            <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #166534; font-weight: bold;">
+              {{ fmt(paket.professional.hemat) }} (~{{ paket.professional.diskon }}%)
+            </td>
+          </tr>
 
-        <!-- HEMAT -->
-        <tr style="background-color: #f0fdf4;">
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; color: #166534; font-weight: bold; font-size: 9.5pt;">
-            Klien hemat
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #166534; font-weight: bold;">
-            {{ fmt(paket.basic.hemat) }} (~{{ paket.basic.diskon }}%)
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #166534; font-weight: bold;">
-            {{ fmt(paket.standard.hemat) }} (~{{ paket.standard.diskon }}%)
-          </td>
-          <td style="padding: 9px 10px; border: 1px solid #cbd5e0; text-align: center; color: #166534; font-weight: bold;">
-            {{ fmt(paket.professional.hemat) }} (~{{ paket.professional.diskon }}%)
-          </td>
-        </tr>
-
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
     <div style="background: #fff7ed; border-left: 3px solid #f97316; padding: 10px 14px; border-radius: 4px; margin-bottom: 10px; font-size: 9.5pt; color: #7c2d12;">
       <strong>Catatan Backup &amp; Infrastruktur:</strong>
       Layanan monitoring mencakup <em>pemantauan</em> keberhasilan sistem backup otomatis
@@ -373,36 +376,38 @@
         saya akan kerjakan semuanya tanpa biaya tambahan selama masih dalam slot
         waktu prioritas yang dialokasikan.
       </p>
-      <table style="width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-bottom: 10px;">
-        <thead>
-          <tr style="background-color: #ede9fe;">
-            <th style="padding: 8px 10px; border: 1px solid #c4b5fd; text-align: left; color: #4c1d95;">Komponen</th>
-            <th style="padding: 8px 10px; border: 1px solid #c4b5fd; text-align: center; color: #4c1d95;">Estimasi Waktu</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="padding: 7px 10px; border: 1px solid #c4b5fd; color: #5b21b6;">Monitoring &amp; pengecekan rutin</td>
-            <td style="padding: 7px 10px; border: 1px solid #c4b5fd; text-align: center; color: #5b21b6;">~4 jam/bulan</td>
-          </tr>
-          <tr style="background-color: #f5f3ff;">
-            <td style="padding: 7px 10px; border: 1px solid #c4b5fd; color: #5b21b6;">Penanganan Tier 1–2 (priority unlimited)</td>
-            <td style="padding: 7px 10px; border: 1px solid #c4b5fd; text-align: center; color: #5b21b6;">~8 jam/bulan</td>
-          </tr>
-          <tr>
-            <td style="padding: 7px 10px; border: 1px solid #c4b5fd; color: #5b21b6;">Penanganan Tier 3 (maks. 3 tiket)</td>
-            <td style="padding: 7px 10px; border: 1px solid #c4b5fd; text-align: center; color: #5b21b6;">~6 jam/bulan</td>
-          </tr>
-          <tr style="background-color: #f5f3ff;">
-            <td style="padding: 7px 10px; border: 1px solid #c4b5fd; color: #5b21b6;">Konsultasi &amp; buffer darurat</td>
-            <td style="padding: 7px 10px; border: 1px solid #c4b5fd; text-align: center; color: #5b21b6;">~2 jam/bulan</td>
-          </tr>
-          <tr style="background-color: #ede9fe;">
-            <td style="padding: 7px 10px; border: 1px solid #c4b5fd; font-weight: bold; color: #4c1d95;"><strong>Total slot prioritas</strong></td>
-            <td style="padding: 7px 10px; border: 1px solid #c4b5fd; text-align: center; font-weight: bold; color: #4c1d95;"><strong>~20 jam/bulan</strong></td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-bottom: 10px;">
+          <thead>
+            <tr style="background-color: #ede9fe;">
+              <th style="padding: 8px 10px; border: 1px solid #c4b5fd; text-align: left; color: #4c1d95;">Komponen</th>
+              <th style="padding: 8px 10px; border: 1px solid #c4b5fd; text-align: center; color: #4c1d95;">Estimasi Waktu</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 7px 10px; border: 1px solid #c4b5fd; color: #5b21b6;">Monitoring &amp; pengecekan rutin</td>
+              <td style="padding: 7px 10px; border: 1px solid #c4b5fd; text-align: center; color: #5b21b6;">~4 jam/bulan</td>
+            </tr>
+            <tr style="background-color: #f5f3ff;">
+              <td style="padding: 7px 10px; border: 1px solid #c4b5fd; color: #5b21b6;">Penanganan Tier 1–2 (priority unlimited)</td>
+              <td style="padding: 7px 10px; border: 1px solid #c4b5fd; text-align: center; color: #5b21b6;">~8 jam/bulan</td>
+            </tr>
+            <tr>
+              <td style="padding: 7px 10px; border: 1px solid #c4b5fd; color: #5b21b6;">Penanganan Tier 3 (maks. 3 tiket)</td>
+              <td style="padding: 7px 10px; border: 1px solid #c4b5fd; text-align: center; color: #5b21b6;">~6 jam/bulan</td>
+            </tr>
+            <tr style="background-color: #f5f3ff;">
+              <td style="padding: 7px 10px; border: 1px solid #c4b5fd; color: #5b21b6;">Konsultasi &amp; buffer darurat</td>
+              <td style="padding: 7px 10px; border: 1px solid #c4b5fd; text-align: center; color: #5b21b6;">~2 jam/bulan</td>
+            </tr>
+            <tr style="background-color: #ede9fe;">
+              <td style="padding: 7px 10px; border: 1px solid #c4b5fd; font-weight: bold; color: #4c1d95;"><strong>Total slot prioritas</strong></td>
+              <td style="padding: 7px 10px; border: 1px solid #c4b5fd; text-align: center; font-weight: bold; color: #4c1d95;"><strong>~20 jam/bulan</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <p style="margin: 0; font-size: 9.5pt; color: #5b21b6;">
         Jika kebutuhan Anda melebihi slot tersebut dalam suatu bulan, saya akan segera
         mengkomunikasikannya dan kita cari solusi terbaik bersama.
@@ -491,22 +496,24 @@
     <h3 style="color: #2b6cb0; font-size: 13pt; font-weight: bold; margin-top: 20px;">
       9. Info Pembayaran
     </h3>
-    <table style="width: 60%; border-collapse: collapse; margin-top: 10px; font-size: 10.5pt;">
-      <tbody>
-        <tr style="background-color: #edf2f7;">
-          <th style="padding: 8px 12px; border: 1px solid #cbd5e0; text-align: left; width: 35%;">Bank</th>
-          <td style="padding: 8px 12px; border: 1px solid #cbd5e0;">{{ c.namaBank }}</td>
-        </tr>
-        <tr>
-          <th style="padding: 8px 12px; border: 1px solid #cbd5e0; text-align: left; background-color: #f7fafc;">No. Rekening</th>
-          <td style="padding: 8px 12px; border: 1px solid #cbd5e0;"><strong>{{ c.noRek }}</strong></td>
-        </tr>
-        <tr style="background-color: #edf2f7;">
-          <th style="padding: 8px 12px; border: 1px solid #cbd5e0; text-align: left;">Atas Nama</th>
-          <td style="padding: 8px 12px; border: 1px solid #cbd5e0;">{{ c.atasNama }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 60%; border-collapse: collapse; margin-top: 10px; font-size: 10.5pt;">
+        <tbody>
+          <tr style="background-color: #edf2f7;">
+            <th style="padding: 8px 12px; border: 1px solid #cbd5e0; text-align: left; width: 35%;">Bank</th>
+            <td style="padding: 8px 12px; border: 1px solid #cbd5e0;">{{ c.namaBank }}</td>
+          </tr>
+          <tr>
+            <th style="padding: 8px 12px; border: 1px solid #cbd5e0; text-align: left; background-color: #f7fafc;">No. Rekening</th>
+            <td style="padding: 8px 12px; border: 1px solid #cbd5e0;"><strong>{{ c.noRek }}</strong></td>
+          </tr>
+          <tr style="background-color: #edf2f7;">
+            <th style="padding: 8px 12px; border: 1px solid #cbd5e0; text-align: left;">Atas Nama</th>
+            <td style="padding: 8px 12px; border: 1px solid #cbd5e0;">{{ c.atasNama }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <p style="font-size: 9.5pt; color: #718096; margin-top: 8px;">
       Pembayaran wajib dilunasi maksimal <strong>3 hari kerja</strong> setelah invoice diterima
       atau pekerjaan dinyatakan selesai, mana yang lebih dahulu terjadi.
@@ -581,3 +588,38 @@ function fmt(angka) {
   return 'Rp ' + angka.toLocaleString('id-ID')
 }
 </script>
+
+<style>
+/* Tabel scroll horizontal di mobile */
+table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100% !important;
+}
+
+/* Kembalikan display normal untuk print */
+@media print {
+  table {
+    display: table;
+    overflow-x: visible;
+  }
+}
+
+/* Font lebih kecil di mobile agar tidak terlalu sempit */
+@media (max-width: 640px) {
+  div[style*="font-size: 11pt"] {
+    font-size: 10pt !important;
+  }
+
+  /* Tabel paket 4 kolom — min width agar bisa scroll */
+  table[style*="font-size: 10pt"] {
+    min-width: 600px;
+  }
+
+  /* Tabel rate card 3 kolom */
+  table[style*="font-size: 10.5pt"] {
+    min-width: 480px;
+  }
+}
+</style>

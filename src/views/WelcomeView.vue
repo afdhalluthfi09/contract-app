@@ -34,15 +34,15 @@
       </div>
 
       <!-- DOKUMEN A4 -->
-      <div class="bg-gray-200 p-4 rounded-2xl overflow-x-auto">
+      <!-- GANTI -->
+      <div class="bg-gray-200 p-2 sm:p-4 rounded-2xl">
         <div
           id="welcomeToPrint"
           class="bg-white shadow-sm mx-auto"
-          style="width: 100%; max-width: 210mm; min-height: 297mm; padding: 20mm;">
+          style="width: 100%; max-width: 210mm; min-height: 297mm; padding: clamp(12px, 4vw, 20mm);">
           <WelcomeTemplate :c="contract" />
         </div>
       </div>
-
     </div>
   </div>
 </template>
