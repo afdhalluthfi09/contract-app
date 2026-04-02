@@ -153,11 +153,21 @@ const copiedWelcome = ref(false)
 const form          = computed(() => contract.value || {})
 
 // ── URLs ──────────────────────────────────────────────────
+// GANTI — pakai window.location.pathname untuk detect base otomatis
+const getBase = () => {
+  const base = import.meta.env.BASE_URL
+  return base.endsWith('/') ? base : base + '/'
+}
+
 const shareUrl = computed(() =>
-  contract.value ? `${window.location.origin}/sign/${contract.value.shareToken}` : ''
+  contract.value
+    ? `${window.location.origin}${getBase()}sign/${contract.value.shareToken}`
+    : ''
 )
 const welcomeUrl = computed(() =>
-  contract.value ? `${window.location.origin}/welcome/${contract.value.welcomeToken}` : ''
+  contract.value
+    ? `${window.location.origin}${getBase()}welcome/${contract.value.welcomeToken}`
+    : ''
 )
 
 // ── Field definisi ────────────────────────────────────────
