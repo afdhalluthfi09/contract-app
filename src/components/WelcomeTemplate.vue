@@ -104,23 +104,48 @@
       <tbody>
         <tr>
           <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 1: Trivial</strong></td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">Perbaikan teks, ganti logo, update konten statis, perubahan CSS ringan.</td>
+          <td style="padding: 10px; border: 1px solid #cbd5e0;">
+            Perubahan UI, teks, aset statis, CSS ringan, dan typo pada pesan/label
+            yang tidak mempengaruhi logika sistem.
+          </td>
           <td style="padding: 10px; border: 1px solid #cbd5e0;">{{ c.tier1 }}</td>
         </tr>
         <tr style="background-color: #f7fafc;">
           <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 2: Minor</strong></td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">Perbaikan logika sederhana, pencegahan error null, validasi input.</td>
+          <td style="padding: 10px; border: 1px solid #cbd5e0;">
+            Perbaikan logika sederhana, validasi input, konfigurasi API pihak ketiga,
+            perbaikan urutan eksekusi fungsi, dan perbaikan response/status code
+            yang menyebabkan perilaku tidak sesuai ekspektasi.
+          </td>
           <td style="padding: 10px; border: 1px solid #cbd5e0;">{{ c.tier2 }}</td>
         </tr>
         <tr>
           <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 3: Major</strong></td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">Perbaikan alur bisnis, optimasi database, integrasi API pihak ketiga.</td>
+          <td style="padding: 10px; border: 1px solid #cbd5e0;">
+            Perbaikan alur bisnis lintas modul, optimasi database, redesign arsitektur
+            integrasi API, penanganan race condition, dan perbaikan yang berdampak
+            pada integritas data secara luas.
+          </td>
           <td style="padding: 10px; border: 1px solid #cbd5e0;">{{ c.tier3 }}</td>
         </tr>
         <tr style="background-color: #f7fafc;">
           <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Tier 4: Critical</strong></td>
-          <td style="padding: 10px; border: 1px solid #cbd5e0;">Sistem mati (down), kebocoran data, fitur utama tidak berfungsi.</td>
+          <td style="padding: 10px; border: 1px solid #cbd5e0;">
+            Sistem tidak dapat digunakan (down), kebocoran atau kerusakan data,
+            celah keamanan aktif yang sedang dieksploitasi.
+          </td>
           <td style="padding: 10px; border: 1px solid #cbd5e0; color: #c53030;"><strong>{{ c.tier4 }}</strong></td>
+        </tr>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #cbd5e0;"><strong>Diagnostic Fee</strong></td>
+          <td style="padding: 10px; border: 1px solid #cbd5e0;">
+            Investigasi yang hasilnya bukan dari sistem yang dikerjakan (gangguan
+            pihak ketiga, kesalahan end-user, atau by design). Dikenakan biaya
+            investigasi setara Tier 1.
+          </td>
+          <td style="padding: 10px; border: 1px solid #cbd5e0; color: #718096;">
+            Setara Tier 1
+          </td>
         </tr>
       </tbody>
     </table>

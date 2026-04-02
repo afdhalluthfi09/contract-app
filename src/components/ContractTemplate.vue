@@ -59,10 +59,36 @@
     </h4>
     <p>(1) PIHAK KEDUA sepakat untuk melaksanakan pekerjaan sesuai dengan kategori tingkat kesulitan berikut:</p>
     <ul style="margin-top: 5px; margin-bottom: 10px;">
-      <li><strong>Tier 1 (Trivial):</strong> Perbaikan UI/teks/CSS ringan ({{ c.tier1 }} / tiket)</li>
-      <li><strong>Tier 2 (Minor):</strong> Perbaikan logika sederhana, validasi ({{ c.tier2 }} / tiket)</li>
-      <li><strong>Tier 3 (Major):</strong> Perbaikan alur bisnis, optimasi database ({{ c.tier3 }} / tiket)</li>
-      <li><strong>Tier 4 (Critical):</strong> Sistem <em>down</em>, kebocoran data ({{ c.tier4 }})</li>
+      <li>
+        <strong>Tier 1 (Trivial):</strong> Perubahan UI, teks, aset statis, CSS ringan,
+        dan typo pada pesan/label yang tidak mempengaruhi logika sistem.
+        ({{ c.tier1 }} / tiket)
+      </li>
+      <li>
+        <strong>Tier 2 (Minor):</strong> Perbaikan logika sederhana, validasi input,
+        konfigurasi integrasi API pihak ketiga, perbaikan urutan eksekusi fungsi,
+        perbaikan HTTP status code atau struktur response yang menyebabkan perilaku
+        tidak sesuai ekspektasi, serta perbaikan bug yang terisolasi pada satu modul.
+        ({{ c.tier2 }} / tiket)
+      </li>
+      <li>
+        <strong>Tier 3 (Major):</strong> Perbaikan alur bisnis lintas modul, optimasi
+        query database, redesign arsitektur integrasi API, penanganan race condition,
+        serta perbaikan yang berdampak pada integritas data secara luas.
+        ({{ c.tier3 }} / tiket)
+      </li>
+      <li>
+        <strong>Tier 4 (Critical):</strong> Sistem tidak dapat digunakan (<em>down</em>),
+        kebocoran atau kerusakan data, celah keamanan aktif yang sedang dieksploitasi.
+        ({{ c.tier4 }})
+      </li>
+      <li>
+        <strong>Diagnostic Fee (Investigasi Tanpa Perbaikan):</strong> Apabila setelah
+        investigasi ditemukan bahwa permasalahan bukan berasal dari sistem yang dikerjakan
+        — misalnya gangguan pihak ketiga, kesalahan end-user, atau perilaku yang memang
+        by design — dikenakan biaya investigasi setara <strong>Tier 1</strong> untuk
+        waktu yang telah digunakan.
+      </li>
       <li><strong>Paket Retainer Bulanan:</strong> {{ c.paket }}</li>
     </ul>
     <p>(2) <strong>Penentuan Nominal Biaya:</strong> Mengingat biaya di atas bersifat rentang, nominal pasti dalam rentang tersebut akan disepakati secara tertulis oleh kedua belah pihak <strong>sebelum pengerjaan dimulai</strong>. Pengerjaan tidak akan dimulai tanpa adanya konfirmasi persetujuan biaya dari PIHAK PERTAMA.</p>
@@ -85,6 +111,13 @@
       <li>Melakukan pembayaran sesuai dengan nominal dan jadwal yang disepakati.</li>
       <li>Memberikan konfirmasi persetujuan biaya secara tertulis sebelum pengerjaan tiap tiket dimulai.</li>
     </ul>
+    <p>(3) <strong>Temuan Kerentanan Keamanan:</strong> Apabila dalam proses pengerjaan
+    PIHAK KEDUA menemukan kerentanan keamanan di luar scope tiket yang berpotensi
+    merugikan PIHAK PERTAMA, PIHAK KEDUA wajib melaporkannya secara tertulis kepada
+    PIHAK PERTAMA. Penanganan kerentanan tersebut akan dituangkan dalam tiket baru
+    sesuai kategori tier yang berlaku dan dikenakan biaya terpisah.
+    <strong>PIHAK KEDUA tidak bertanggung jawab atas kerentanan yang telah dilaporkan
+    secara tertulis namun tidak ditindaklanjuti oleh PIHAK PERTAMA.</strong></p>
 
     <!-- PASAL 3 -->
     <h4 style="font-size: 11pt; font-weight: bold; text-align: center; margin-top: 25px;">
@@ -104,6 +137,12 @@
       (1) Seluruh hasil pekerjaan yang bersifat spesifik terhadap sistem PIHAK PERTAMA dan telah dibayar lunas, menjadi Hak Milik Eksklusif PIHAK PERTAMA.<br>
       (2) <em>Base code</em>, <em>library</em>, fungsi utilitas umum, dan komponen generik yang dikembangkan PIHAK KEDUA secara independen sebelum atau selama perjanjian ini — yang tidak bersifat eksklusif terhadap sistem PIHAK PERTAMA — tetap menjadi hak milik PIHAK KEDUA dan dapat digunakan kembali pada proyek lain.<br>
       (3) Selama pembayaran belum lunas, PIHAK KEDUA berhak menahan penyerahan <em>source code</em> final kepada PIHAK PERTAMA.
+      (4) <strong>Batasan Tanggung Jawab Sistem Warisan (<em>Legacy System</em>):</strong>
+      PIHAK KEDUA tidak bertanggung jawab atas kerentanan keamanan, kebocoran data,
+      atau kegagalan sistem yang berasal dari kode, konfigurasi, atau infrastruktur
+      yang dikembangkan sebelum tanggal penandatanganan perjanjian ini. Tanggung jawab
+      PIHAK KEDUA hanya mencakup kode dan perubahan yang secara eksplisit dikerjakan
+      berdasarkan tiket yang disepakati dalam perjanjian ini.
     </p>
 
     <!-- PASAL 5 -->
@@ -209,9 +248,9 @@ dikirimkan, maka pekerjaan dianggap telah diterima dan disetujui secara otomatis
 
       <ul style="font-size: 9.5pt; color: #333; margin: 8px 0 14px; padding-left: 18px; line-height: 1.8;">
         <li>Ruang lingkup, biaya, definisi tiket, dan konfirmasi sebelum pengerjaan sesuai <strong>Pasal 1</strong>.</li>
-        <li>Kewajiban, klausul akses sistem, dan penghentian hitungan waktu sesuai <strong>Pasal 2</strong>.</li>
+        <li>Kewajiban, klausul akses sistem, penghentian hitungan waktu, dan pelaporan kerentanan keamanan sesuai <strong>Pasal 2</strong>.</li>
         <li>Kerahasiaan informasi berlaku 2 tahun pasca-kontrak sesuai <strong>Pasal 3</strong>.</li>
-        <li>Hak kekayaan intelektual spesifik sistem dan perlindungan <em>base code</em> sesuai <strong>Pasal 4</strong>.</li>
+        <li>Hak kekayaan intelektual, perlindungan <em>base code</em>, dan batasan tanggung jawab sistem warisan (<em>legacy</em>) sesuai <strong>Pasal 4</strong>.</li>
         <li>Jadwal pembayaran 3 hari kerja, definisi selesai = dapat diuji di <em>production</em>, <em>deemed acceptance</em>, dan hak penghentian layanan sesuai <strong>Pasal 5</strong>.</li>
         <li>Masa berlaku <strong>{{ c.jangkaWaktu }}</strong>, <em>auto-renewal</em> H-7, garansi 30 hari tetap berlaku pasca-kontrak sesuai <strong>Pasal 6</strong>.</li>
         <li>Biaya pihak ketiga (server, domain, API) di luar biaya jasa sesuai <strong>Pasal 7</strong>.</li>
