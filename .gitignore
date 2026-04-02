@@ -28,3 +28,4 @@ package-lock.json
 .vscode/
 .env
 .idx/
+.env.production
