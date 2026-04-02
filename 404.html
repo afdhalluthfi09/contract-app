@@ -3,8 +3,14 @@
   <head>
     <meta charset="utf-8">
     <script>
-      sessionStorage.redirect = location.href;
-      window.location.replace('/contract-app/');
+      var l = window.location;
+      var segmentCount = 1;
+      sessionStorage.redirect = l.href;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, segmentCount + 1).join('/') + '/?/' +
+        l.pathname.slice(1) + (l.search ? '&' + l.search.slice(1) : '') + l.hash
+      );
     </script>
   </head>
 </html>
