@@ -39,7 +39,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory('/contract-app/'), // tambahkan base ini
+  history: createWebHistory('/contract-app/'),
   routes
 })
 
