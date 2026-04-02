@@ -136,7 +136,21 @@
     </div>
   </div>
 </template>
-
+<style>
+@media print {
+  body > * { display: none !important; }
+  #documentToPrint {
+    display: block !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20mm;
+    box-shadow: none;
+  }
+  #documentToPrint * { display: block; }
+}
+</style>
 <script setup>
 import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -250,6 +264,7 @@ async function downloadPDF() {
   const content    = document.getElementById('documentToPrint').innerHTML
   const namaKlien  = contract.value?.namaKlien ?? 'Klien'
   const nomorSurat = contract.value?.nomorSurat ?? ''
+  const namaDev    = contract.value?.namaDev ?? 'Developer'
 
   const printWindow = window.open('', '_blank')
   printWindow.document.write(`
@@ -257,12 +272,31 @@ async function downloadPDF() {
     <html>
       <head>
         <meta charset="UTF-8">
-        <title>Kontrak - ${namaKlien}</title>
+        <title>Kontrak — ${namaKlien}</title>
         <style>
           @page {
-            margin: 20mm;
             size: A4;
+            margin: 20mm 20mm 25mm 20mm;
+
+            @top-left   { content: ""; }
+            @top-center { content: ""; }
+            @top-right  { content: ""; }
+
+            @bottom-left {
+              content: "Ref: ${nomorSurat}";
+              font-family: Arial, sans-serif;
+              font-size: 8pt;
+              color: #94a3b8;
+            }
+            @bottom-center {
+              content: "Halaman " counter(page) " dari " counter(pages);
+              font-family: Arial, sans-serif;
+              font-size: 8pt;
+              color: #94a3b8;
+            }
+            @bottom-right { content: ""; }
           }
+
           body {
             font-family: Arial, sans-serif;
             color: #000;
@@ -281,8 +315,6 @@ async function downloadPDF() {
           li { margin-bottom: 4px; }
           hr { border: 0; border-top: 1px solid #000; margin: 20px 0; }
           img { max-height: 90px; max-width: 90%; object-fit: contain; display: block; margin: 0 auto; }
-
-          /* Execution page tidak terpotong */
           [style*="page-break-before"] {
             page-break-before: always !important;
             break-before: page !important;
