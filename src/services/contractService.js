@@ -54,7 +54,7 @@ const COL = 'contracts'
 // }
 export async function createContract(data, ownerUid) {
   const shareToken   = crypto.randomUUID()
-  const welcomeToken = crypto.randomUUID() // token terpisah untuk welcome packet
+  const welcomeToken = crypto.randomUUID()
   return await addDoc(collection(db, COL), {
     ...data,
     signature_klien: '',
@@ -63,7 +63,14 @@ export async function createContract(data, ownerUid) {
     createdBy:       ownerUid,
     shareToken,
     welcomeToken,
-    // Welcome Packet data (bisa diedit per kontrak)
+    // Field angka untuk kalkulasi paket (terpisah dari teks display)
+    tierHarga: {
+      tier1: 200000,   // nilai minimum Tier 1
+      tier2: 400000,   // nilai minimum Tier 2
+      tier3: 1000000,  // nilai minimum Tier 3
+      tier4: 2500000,  // nilai minimum Tier 4
+      monitoring: 400000,
+    },
     welcomeData: {
       pendahuluan: 'Terima kasih telah mempercayakan pengelolaan sistem Anda kepada saya. Dokumen ini disusun untuk memastikan kerja sama kita berjalan transparan, efisien, dan profesional.',
       slaResponse: {
@@ -72,9 +79,12 @@ export async function createContract(data, ownerUid) {
         tier3: '3–5 Hari Kerja',
         tier4: '< 24 Jam (Prioritas Darurat)',
       },
-      caraSubmit: 'Kirimkan laporan bug/permintaan melalui WhatsApp atau email resmi dengan menyertakan: (1) Screenshot/video error, (2) Langkah reproduksi, (3) Dampak ke operasional bisnis.',
-      metodePembayaran: 'Pembayaran dilakukan maksimal 3 hari kerja setelah invoice dikirimkan. Keterlambatan pembayaran lebih dari 7 hari kerja dapat menyebabkan penundaan pengerjaan.',
-      catatan: 'Perjanjian ini bersifat profesional dan saling mengikat. Setiap perubahan scope pekerjaan wajib dikomunikasikan dan disetujui secara tertulis sebelum dikerjakan.',
+      // Override manual harga paket (null = auto-hitung dari tierHarga)
+      overridePaket: {
+        basic:        null,
+        standard:     null,
+        professional: null,
+      },
     },
     createdAt: serverTimestamp(),
   })
