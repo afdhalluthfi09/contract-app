@@ -3,12 +3,9 @@
   <head>
     <meta charset="utf-8">
     <script>
-      // Redirect semua 404 ke index dengan query string
-      var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1).join('/') +
-        '/?/' + l.pathname.slice(1) + (l.search ? '&' + l.search.slice(1) : '') + l.hash
+      sessionStorage.redirect = location.href;
+      window.location.replace(
+        'https://afdhalluthfi09.github.io/contract-app/'
       );
     </script>
   </head>
