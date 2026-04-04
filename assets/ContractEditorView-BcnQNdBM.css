@@ -1,1 +1,0 @@
-@media print{body>*{display:none!important}#documentToPrint{width:100%;box-shadow:none;padding:20mm;position:fixed;top:0;left:0;display:block!important}#documentToPrint *{display:block}}
