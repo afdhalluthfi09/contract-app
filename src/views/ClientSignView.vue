@@ -23,12 +23,13 @@
             </span>
         </div>
         <!-- Preview A4 -->
-        <div class="bg-gray-200 p-4 overflow-x-auto">
+        <!-- GANTI -->
+          <div class="bg-gray-200 p-2 sm:p-4 overflow-x-auto">
             <div class="bg-white shadow-sm mx-auto"
-            style="width: 100%; max-width: 210mm; min-height: 297mm; padding: 15mm;">
-            <ContractTemplate :c="contract" />
+              style="width: 100%; max-width: 210mm; padding: clamp(16px, 5vw, 15mm);">
+              <ContractTemplate :c="contract" />
             </div>
-        </div>
+          </div>
         </div>
 
       <!-- Status TTD dev -->
@@ -63,7 +64,33 @@
     </div>
   </div>
 </template>
+<style>
+/* Mobile: font lebih kecil agar tidak terlalu padat */
+@media (max-width: 640px) {
+  #documentArea {
+    font-size: 9pt !important;
+  }
 
+  /* Tabel scroll horizontal */
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Execution page border tetap tapi padding lebih kecil */
+  [style*="page-break-before"] {
+    padding: 16px !important;
+  }
+}
+
+@media print {
+  table {
+    display: table;
+    overflow-x: visible;
+  }
+}
+</style>
 <script setup>
 import { useRoute } from 'vue-router'
 import ContractTemplate from '@/components/ContractTemplate.vue'

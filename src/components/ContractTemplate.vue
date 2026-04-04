@@ -1,6 +1,6 @@
 <!-- src/components/ContractTemplate.vue -->
 <template>
-  <div style="font-family: Arial, sans-serif; color: #000; line-height: 1.6; font-size: 11pt;">
+  <div id="documentArea" style="font-family: Arial, sans-serif; color: #000; line-height: 1.6; font-size: 11pt;">
 
     <h2 style="text-align: center; font-size: 14pt; font-weight: bold; margin-bottom: 5px;">
       PROPOSAL & PERJANJIAN KERJASAMA PENGEMBANGAN SISTEM
@@ -265,61 +265,62 @@ dikirimkan, maka pekerjaan dianggap telah diterima dan disetujui secara otomatis
         Tanggal: <strong>{{ c.tanggal }} {{ c.bulan }} {{ c.tahun }}</strong>
       </p>
 
-      <table style="width: 100%; text-align: center; border-collapse: collapse;">
-        <tbody>
-          <tr>
-            <td style="width: 50%; padding: 6px 16px;">
-              <p style="font-size: 10pt; font-weight: bold; margin: 0 0 2px;">PIHAK PERTAMA (KLIEN)</p>
-              <p style="font-size: 9.5pt; color: #555; margin: 0 0 8px;">Pemberi Kerja</p>
-              <div style="
-                height: 110px;
-                border: 1.5px solid #94a3b8;
-                border-radius: 6px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: #f8fafc;
-                margin-bottom: 10px;
-              ">
-                <img v-if="c.signature_klien" :src="c.signature_klien"
-                  style="max-height: 90px; max-width: 90%; object-fit: contain;" />
-                <span v-else style="color: #94a3b8; font-size: 9pt; font-style: italic;">
-                  Tanda Tangan
-                </span>
-              </div>
-              <div style="border-top: 1px solid #000; padding-top: 6px;">
-                <p style="font-weight: bold; font-size: 10.5pt; margin: 0;">{{ c.namaKlien }}</p>
-                <p style="font-size: 9.5pt; color: #444; margin: 2px 0 0;">{{ c.jabatanKlien }}</p>
-              </div>
-            </td>
-  
-            <td style="width: 50%; padding: 6px 16px;">
-              <p style="font-size: 10pt; font-weight: bold; margin: 0 0 2px;">PIHAK KEDUA (DEVELOPER)</p>
-              <p style="font-size: 9.5pt; color: #555; margin: 0 0 8px;">Penyedia Jasa</p>
-              <div style="
-                height: 110px;
-                border: 1.5px solid #94a3b8;
-                border-radius: 6px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: #f8fafc;
-                margin-bottom: 10px;
-              ">
-                <img v-if="c.signature_dev" :src="c.signature_dev"
-                  style="max-height: 90px; max-width: 90%; object-fit: contain;" />
-                <span v-else style="color: #94a3b8; font-size: 9pt; font-style: italic;">
-                  Tanda Tangan
-                </span>
-              </div>
-              <div style="border-top: 1px solid #000; padding-top: 6px;">
-                <p style="font-weight: bold; font-size: 10.5pt; margin: 0;">{{ c.namaDev }}</p>
-                <p style="font-size: 9.5pt; color: #444; margin: 2px 0 0;">Fullstack Web Developer</p>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- GANTI -->
+      <div style="display: flex; gap: 12px; margin-top: 4px;">
+
+        <!-- PIHAK PERTAMA -->
+        <div style="flex: 1; text-align: center; padding: 6px 8px;">
+          <p style="font-size: 10pt; font-weight: bold; margin: 0 0 2px;">PIHAK PERTAMA (KLIEN)</p>
+          <p style="font-size: 9.5pt; color: #555; margin: 0 0 8px;">Pemberi Kerja</p>
+          <div style="
+            height: 110px;
+            border: 1.5px solid #94a3b8;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            margin-bottom: 10px;
+          ">
+            <img v-if="c.signature_klien" :src="c.signature_klien"
+              style="max-height: 90px; max-width: 90%; object-fit: contain;" />
+            <span v-else style="color: #94a3b8; font-size: 9pt; font-style: italic;">
+              Tanda Tangan
+            </span>
+          </div>
+          <div style="border-top: 1px solid #000; padding-top: 6px;">
+            <p style="font-weight: bold; font-size: 10.5pt; margin: 0;">{{ c.namaKlien }}</p>
+            <p style="font-size: 9.5pt; color: #444; margin: 2px 0 0;">{{ c.jabatanKlien }}</p>
+          </div>
+        </div>
+
+        <!-- PIHAK KEDUA -->
+        <div style="flex: 1; text-align: center; padding: 6px 8px;">
+          <p style="font-size: 10pt; font-weight: bold; margin: 0 0 2px;">PIHAK KEDUA (DEVELOPER)</p>
+          <p style="font-size: 9.5pt; color: #555; margin: 0 0 8px;">Penyedia Jasa</p>
+          <div style="
+            height: 110px;
+            border: 1.5px solid #94a3b8;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            margin-bottom: 10px;
+          ">
+            <img v-if="c.signature_dev" :src="c.signature_dev"
+              style="max-height: 90px; max-width: 90%; object-fit: contain;" />
+            <span v-else style="color: #94a3b8; font-size: 9pt; font-style: italic;">
+              Tanda Tangan
+            </span>
+          </div>
+          <div style="border-top: 1px solid #000; padding-top: 6px;">
+            <p style="font-weight: bold; font-size: 10.5pt; margin: 0;">{{ c.namaDev }}</p>
+            <p style="font-size: 9.5pt; color: #444; margin: 2px 0 0;">Fullstack Web Developer</p>
+          </div>
+        </div>
+
+      </div>
 
       <div style="margin-top: 20px; padding-top: 10px; border-top: 1px dashed #cbd5e0; text-align: center;">
         <p style="font-size: 8.5pt; color: #94a3b8; margin: 0;">
