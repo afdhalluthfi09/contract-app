@@ -266,10 +266,10 @@ dikirimkan, maka pekerjaan dianggap telah diterima dan disetujui secara otomatis
       </p>
 
       <!-- GANTI -->
-      <div style="display: flex; gap: 12px; margin-top: 4px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px;">
 
         <!-- PIHAK PERTAMA -->
-        <div style="flex: 1; text-align: center; padding: 6px 8px;">
+        <div style="flex: 1; min-width: 140px; text-align: center; padding: 6px 8px;">
           <p style="font-size: 10pt; font-weight: bold; margin: 0 0 2px;">PIHAK PERTAMA (KLIEN)</p>
           <p style="font-size: 9.5pt; color: #555; margin: 0 0 8px;">Pemberi Kerja</p>
           <div style="
@@ -295,7 +295,7 @@ dikirimkan, maka pekerjaan dianggap telah diterima dan disetujui secara otomatis
         </div>
 
         <!-- PIHAK KEDUA -->
-        <div style="flex: 1; text-align: center; padding: 6px 8px;">
+        <div style="flex: 1; min-width: 140px; text-align: center; padding: 6px 8px;">
           <p style="font-size: 10pt; font-weight: bold; margin: 0 0 2px;">PIHAK KEDUA (DEVELOPER)</p>
           <p style="font-size: 9.5pt; color: #555; margin: 0 0 8px;">Penyedia Jasa</p>
           <div style="

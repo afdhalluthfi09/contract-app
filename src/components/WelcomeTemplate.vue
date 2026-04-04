@@ -493,46 +493,49 @@
     </p>
 
     <!-- 9. PEMBAYARAN -->
-    <h3 style="color: #2b6cb0; font-size: 13pt; font-weight: bold; margin-top: 20px;">
-      9. Info Pembayaran
-    </h3>
-    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
-      <table style="width: 60%; border-collapse: collapse; margin-top: 10px; font-size: 10.5pt;">
-        <tbody>
-          <tr style="background-color: #edf2f7;">
-            <th style="padding: 8px 12px; border: 1px solid #cbd5e0; text-align: left; width: 35%;">Bank</th>
-            <td style="padding: 8px 12px; border: 1px solid #cbd5e0;">{{ c.namaBank }}</td>
-          </tr>
-          <tr>
-            <th style="padding: 8px 12px; border: 1px solid #cbd5e0; text-align: left; background-color: #f7fafc;">No. Rekening</th>
-            <td style="padding: 8px 12px; border: 1px solid #cbd5e0;"><strong>{{ c.noRek }}</strong></td>
-          </tr>
-          <tr style="background-color: #edf2f7;">
-            <th style="padding: 8px 12px; border: 1px solid #cbd5e0; text-align: left;">Atas Nama</th>
-            <td style="padding: 8px 12px; border: 1px solid #cbd5e0;">{{ c.atasNama }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p style="font-size: 9.5pt; color: #718096; margin-top: 8px;">
-      Pembayaran wajib dilunasi maksimal <strong>3 hari kerja</strong> setelah invoice diterima
-      atau pekerjaan dinyatakan selesai, mana yang lebih dahulu terjadi.
-    </p>
+     <div style="page-break-inside: avoid; break-inside: avoid;">
+      <h3 style="color: #2b6cb0; font-size: 13pt; font-weight: bold; margin-top: 20px;">
+        9. Info Pembayaran
+      </h3>
+      <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+        <table style="width: 60%; border-collapse: collapse; margin-top: 10px; font-size: 10.5pt;">
+          <tbody>
+            <tr style="background-color: #edf2f7;">
+              <th style="padding: 8px 12px; border: 1px solid #cbd5e0; text-align: left; width: 35%;">Bank</th>
+              <td style="padding: 8px 12px; border: 1px solid #cbd5e0;">{{ c.namaBank }}</td>
+            </tr>
+            <tr>
+              <th style="padding: 8px 12px; border: 1px solid #cbd5e0; text-align: left; background-color: #f7fafc;">No. Rekening</th>
+              <td style="padding: 8px 12px; border: 1px solid #cbd5e0;"><strong>{{ c.noRek }}</strong></td>
+            </tr>
+            <tr style="background-color: #edf2f7;">
+              <th style="padding: 8px 12px; border: 1px solid #cbd5e0; text-align: left;">Atas Nama</th>
+              <td style="padding: 8px 12px; border: 1px solid #cbd5e0;">{{ c.atasNama }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size: 9.5pt; color: #718096; margin-top: 8px;">
+        Pembayaran wajib dilunasi maksimal <strong>3 hari kerja</strong> setelah invoice diterima
+        atau pekerjaan dinyatakan selesai, mana yang lebih dahulu terjadi.
+      </p>
 
-    <!-- FOOTER -->
-    <div style="margin-top: 40px; padding-top: 16px; border-top: 2px solid #e2e8f0;">
-      <p style="margin: 0; color: #4a5568; font-weight: bold;">
-        Kontak &amp; Informasi Lanjut:
-      </p>
-      <p style="margin: 4px 0 0; color: #718096; font-size: 10.5pt;">
-        {{ c.namaDev }} – Fullstack Developer
-      </p>
-      <p style="margin: 8px 0 0; color: #a0aec0; font-size: 9.5pt;">
-        Ref. Kontrak: {{ c.nomorSurat }} &nbsp;|&nbsp;
-        Masa Berlaku: {{ c.jangkaWaktu }} &nbsp;|&nbsp;
-        {{ c.lokasi }}, {{ c.tanggal }} {{ c.bulan }} {{ c.tahun }}
-      </p>
-    </div>
+      <!-- FOOTER -->
+      <div style="margin-top: 40px; padding-top: 16px; border-top: 2px solid #e2e8f0;
+        page-break-inside: avoid; break-inside: avoid;">
+        <p style="margin: 0; color: #4a5568; font-weight: bold;">
+          Kontak &amp; Informasi Lanjut:
+        </p>
+        <p style="margin: 4px 0 0; color: #718096; font-size: 10.5pt;">
+          {{ c.namaDev }} – Fullstack Developer
+        </p>
+        <p style="margin: 8px 0 0; color: #a0aec0; font-size: 9.5pt;">
+          Ref. Kontrak: {{ c.nomorSurat }} &nbsp;|&nbsp;
+          Masa Berlaku: {{ c.jangkaWaktu }} &nbsp;|&nbsp;
+          {{ c.lokasi }}, {{ c.tanggal }} {{ c.bulan }} {{ c.tahun }}
+        </p>
+      </div>
+      </div>
 
   </div>
 </template>
