@@ -2,155 +2,165 @@
   <div class="min-h-screen bg-gray-50 p-4">
     <div v-if="loading" class="text-center py-20 text-gray-400">Memuat kontrak...</div>
 
-    <div v-else class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div v-else class="max-w-5xl mx-auto">
 
-      <!-- KOLOM KIRI: FORM -->
-      <div class="bg-white rounded-2xl shadow p-6 space-y-4 h-fit sticky top-4">
+      <!-- TAB SWITCHER — hanya muncul di mobile -->
+      <div class="flex md:hidden mb-4 bg-white rounded-xl shadow overflow-hidden">
+        <button
+          @click="activeTab = 'form'"
+          :class="activeTab === 'form'
+            ? 'bg-blue-600 text-white'
+            : 'text-gray-500 hover:bg-gray-50'"
+          class="flex-1 py-3 text-sm font-medium transition">
+          Form Edit
+        </button>
+        <button
+          @click="activeTab = 'preview'"
+          :class="activeTab === 'preview'
+            ? 'bg-blue-600 text-white'
+            : 'text-gray-500 hover:bg-gray-50'"
+          class="flex-1 py-3 text-sm font-medium transition">
+          Preview Kontrak
+        </button>
+      </div>
 
-        <div class="flex items-center justify-between mb-2">
-          <h2 class="font-bold text-gray-800">Edit Kontrak</h2>
-          <button @click="router.back()" class="text-sm text-gray-400 hover:text-gray-600">← Kembali</button>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- KOLOM KIRI: FORM -->
+        <div
+          :class="activeTab === 'preview' ? 'hidden md:block' : 'block'"
+          class="bg-white rounded-2xl shadow p-6 space-y-4 h-fit md:sticky md:top-4">
+
+          <div class="flex items-center justify-between mb-2">
+            <h2 class="font-bold text-gray-800">Edit Kontrak</h2>
+            <button @click="router.back()" class="text-sm text-gray-400 hover:text-gray-600">← Kembali</button>
+          </div>
+
+          <div v-for="field in fields" :key="field.key">
+            <label class="block text-xs text-gray-500 mb-1">{{ field.label }}</label>
+            <input v-model="form[field.key]" @change="save(field.key)"
+              class="w-full border rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          </div>
+
+          <!-- HARGA TIER -->
+          <div class="border border-blue-200 rounded-xl p-4 bg-blue-50 space-y-3">
+            <p class="text-xs font-semibold text-blue-700">
+              Harga Minimum Tier (kalkulasi paket otomatis)
+            </p>
+            <p class="text-xs text-blue-400">
+              Angka ini dipakai menghitung nilai paket monthly di Welcome Packet.
+            </p>
+            <div v-for="th in tierHargaFields" :key="th.key" class="flex items-center gap-2">
+              <label class="text-xs text-gray-500 w-32 shrink-0">{{ th.label }}</label>
+              <div class="relative flex-1">
+                <span class="absolute left-2 top-2 text-xs text-gray-400">Rp</span>
+                <input
+                  type="number"
+                  :value="tierHargaForm[th.key]"
+                  @change="saveTierHarga(th.key, $event.target.value)"
+                  class="w-full border rounded-lg pl-8 pr-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- LINK TTD -->
+          <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+            <p class="text-xs text-blue-700 font-medium mb-2">🔏 Link TTD Kontrak untuk klien:</p>
+            <div class="flex gap-2">
+              <input :value="shareUrl" readonly
+                class="flex-1 text-xs border rounded p-2 bg-white text-gray-600" />
+              <button @click="copyLink"
+                class="text-xs bg-blue-600 text-white px-3 rounded-lg hover:bg-blue-700 transition">
+                {{ copied ? '✓' : 'Copy' }}
+              </button>
+            </div>
+          </div>
+
+          <!-- LINK WELCOME -->
+          <div class="p-3 bg-indigo-50 rounded-lg border border-indigo-200">
+            <p class="text-xs text-indigo-700 font-medium mb-2">📄 Link Welcome Packet untuk klien:</p>
+            <div class="flex gap-2">
+              <input :value="welcomeUrl" readonly
+                class="flex-1 text-xs border rounded p-2 bg-white text-gray-600" />
+              <button @click="copyWelcomeLink"
+                class="text-xs bg-indigo-600 text-white px-3 rounded-lg hover:bg-indigo-700 transition">
+                {{ copiedWelcome ? '✓' : 'Copy' }}
+              </button>
+            </div>
+          </div>
+
+          <!-- STATUS -->
+          <div class="flex items-center justify-between pt-2 border-t">
+            <span class="text-xs text-gray-500">Status kontrak</span>
+            <span :class="statusClass" class="text-xs font-medium px-3 py-1 rounded-full">
+              {{ statusLabel }}
+            </span>
+          </div>
+
+          <!-- TTD DEVELOPER -->
+          <div class="pt-2 border-t">
+            <h3 class="text-sm font-semibold text-gray-700 mb-3">Tanda Tangan Developer (Kamu)</h3>
+            <SignatureCanvas
+              :existing-signature="contract?.signature_dev"
+              :signer-name="contract?.namaDev || 'Developer'"
+              :locked="!!contract?.signature_dev"
+              @save="handleSaveDevSignature"
+            />
+          </div>
+
+          <!-- TTD KLIEN -->
+          <div class="pt-2 border-t">
+            <h3 class="text-sm font-semibold text-gray-700 mb-3">Tanda Tangan Klien</h3>
+            <div v-if="contract?.signature_klien" class="text-center">
+              <img :src="contract.signature_klien" class="max-h-20 mx-auto" />
+              <p class="text-xs text-green-600 mt-2">✓ Klien sudah menandatangani</p>
+            </div>
+            <div v-else
+              class="h-20 border-2 border-dashed rounded-xl flex items-center justify-center text-gray-400 text-sm">
+              Menunggu TTD klien...
+            </div>
+          </div>
+
+          <!-- DOWNLOAD -->
+          <p v-if="contract?.status === 'completed'"
+            class="text-xs text-gray-400 text-center">
+            Saat dialog print muncul, matikan "Headers and footers" untuk hasil terbaik.
+          </p>
+          <button
+            v-if="contract?.status === 'completed'"
+            @click="downloadPDF"
+            class="w-full bg-green-600 text-white py-3 rounded-xl font-medium hover:bg-green-700 transition">
+            ↓ Download PDF Kontrak
+          </button>
+
         </div>
 
-        <!-- SECTION 1: FIELD TEKS -->
-        <div v-for="field in fields" :key="field.key">
-          <label class="block text-xs text-gray-500 mb-1">{{ field.label }}</label>
-          <input v-model="form[field.key]" @change="save(field.key)"
-            class="w-full border rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
-        </div>
-
-        <!-- SECTION 2: HARGA TIER (untuk kalkulasi paket otomatis) -->
-        <div class="border border-blue-200 rounded-xl p-4 bg-blue-50 space-y-3">
-          <p class="text-xs font-semibold text-blue-700">
-            Harga Minimum Tier (kalkulasi paket otomatis)
-          </p>
-          <p class="text-xs text-blue-400">
-            Angka ini dipakai menghitung nilai paket monthly di Welcome Packet.
-            Berbeda dari teks display di atas.
-          </p>
-          <div v-for="th in tierHargaFields" :key="th.key" class="flex items-center gap-2">
-            <label class="text-xs text-gray-500 w-32 shrink-0">{{ th.label }}</label>
-            <div class="relative flex-1">
-              <span class="absolute left-2 top-2 text-xs text-gray-400">Rp</span>
-              <input
-                type="number"
-                :value="tierHargaForm[th.key]"
-                @change="saveTierHarga(th.key, $event.target.value)"
-                class="w-full border rounded-lg pl-8 pr-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
+        <!-- KOLOM KANAN: PREVIEW -->
+        <div
+          :class="activeTab === 'form' ? 'hidden md:block' : 'block'"
+          class="bg-white rounded-2xl shadow overflow-hidden">
+          <div class="bg-gray-800 px-4 py-2 flex items-center justify-between sticky top-0 z-10">
+            <span class="text-white text-sm font-mono">Preview Kontrak</span>
+            <span :class="statusClass" class="text-xs font-bold px-2 py-0.5 rounded">
+              {{ statusLabel }}
+            </span>
+          </div>
+          <div class="bg-gray-200 p-3 overflow-x-auto">
+            <div
+              id="documentToPrint"
+              class="bg-white shadow-sm mx-auto"
+              style="width: 100%; max-width: 210mm; min-height: 297mm; padding: clamp(12px, 4vw, 15mm);">
+              <ContractTemplate v-if="contract" :c="contract" />
             </div>
           </div>
         </div>
 
-        <!-- SECTION 3: LINK SHARE -->
-        <!-- Link TTD Kontrak -->
-        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
-          <p class="text-xs text-blue-700 font-medium mb-2">
-            🔏 Link TTD Kontrak untuk klien:
-          </p>
-          <div class="flex gap-2">
-            <input :value="shareUrl" readonly
-              class="flex-1 text-xs border rounded p-2 bg-white text-gray-600" />
-            <button @click="copyLink"
-              class="text-xs bg-blue-600 text-white px-3 rounded-lg hover:bg-blue-700 transition">
-              {{ copied ? '✓' : 'Copy' }}
-            </button>
-          </div>
-        </div>
-
-        <!-- Link Welcome Packet -->
-        <div class="p-3 bg-indigo-50 rounded-lg border border-indigo-200">
-          <p class="text-xs text-indigo-700 font-medium mb-2">
-            📄 Link Welcome Packet untuk klien:
-          </p>
-          <div class="flex gap-2">
-            <input :value="welcomeUrl" readonly
-              class="flex-1 text-xs border rounded p-2 bg-white text-gray-600" />
-            <button @click="copyWelcomeLink"
-              class="text-xs bg-indigo-600 text-white px-3 rounded-lg hover:bg-indigo-700 transition">
-              {{ copiedWelcome ? '✓' : 'Copy' }}
-            </button>
-          </div>
-        </div>
-
-        <!-- SECTION 4: STATUS -->
-        <div class="flex items-center justify-between pt-2 border-t">
-          <span class="text-xs text-gray-500">Status kontrak</span>
-          <span :class="statusClass" class="text-xs font-medium px-3 py-1 rounded-full">
-            {{ statusLabel }}
-          </span>
-        </div>
-
-        <!-- SECTION 5: TTD DEVELOPER -->
-        <div class="pt-2 border-t">
-          <h3 class="text-sm font-semibold text-gray-700 mb-3">Tanda Tangan Developer (Kamu)</h3>
-          <SignatureCanvas
-            :existing-signature="contract?.signature_dev"
-            :signer-name="contract?.namaDev || 'Developer'"
-            :locked="!!contract?.signature_dev"
-            @save="handleSaveDevSignature"
-          />
-        </div>
-
-        <!-- SECTION 6: TTD KLIEN (read-only) -->
-        <div class="pt-2 border-t">
-          <h3 class="text-sm font-semibold text-gray-700 mb-3">Tanda Tangan Klien</h3>
-          <div v-if="contract?.signature_klien" class="text-center">
-            <img :src="contract.signature_klien" class="max-h-20 mx-auto" />
-            <p class="text-xs text-green-600 mt-2">✓ Klien sudah menandatangani</p>
-          </div>
-          <div v-else
-            class="h-20 border-2 border-dashed rounded-xl flex items-center justify-center text-gray-400 text-sm">
-            Menunggu TTD klien...
-          </div>
-        </div>
-
-        <!-- SECTION 7: DOWNLOAD (hanya jika completed) -->
-        <button
-          v-if="contract?.status === 'completed'"
-          @click="downloadPDF"
-          class="w-full bg-green-600 text-white py-3 rounded-xl font-medium hover:bg-green-700 transition">
-          ↓ Download PDF Kontrak
-        </button>
-
       </div>
-
-      <!-- KOLOM KANAN: PREVIEW DOKUMEN -->
-      <div class="bg-white rounded-2xl shadow overflow-hidden">
-        <div class="bg-gray-800 px-4 py-2 flex items-center justify-between sticky top-0 z-10">
-          <span class="text-white text-sm font-mono">Preview Kontrak</span>
-          <span :class="statusClass" class="text-xs font-bold px-2 py-0.5 rounded">
-            {{ statusLabel }}
-          </span>
-        </div>
-        <div class="bg-gray-200 p-3 overflow-x-auto">
-          <div
-            id="documentToPrint"
-            class="bg-white shadow-sm mx-auto"
-            style="width: 100%; max-width: 210mm; min-height: 297mm; padding: 15mm;">
-            <ContractTemplate v-if="contract" :c="contract" />
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </template>
-<style>
-@media print {
-  body > * { display: none !important; }
-  #documentToPrint {
-    display: block !important;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20mm;
-    box-shadow: none;
-  }
-  #documentToPrint * { display: block; }
-}
-</style>
+
 <script setup>
 import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -162,12 +172,11 @@ const route  = useRoute()
 const router = useRouter()
 const { contract, loading, save: saveField, saveDevSignature } = useContractEditor(route.params.id)
 
+const activeTab     = ref('form') // default tab di mobile
 const copied        = ref(false)
 const copiedWelcome = ref(false)
 const form          = computed(() => contract.value || {})
 
-// ── URLs ──────────────────────────────────────────────────
-// GANTI — pakai window.location.pathname untuk detect base otomatis
 const getBase = () => {
   const base = import.meta.env.BASE_URL
   return base.endsWith('/') ? base : base + '/'
@@ -184,7 +193,6 @@ const welcomeUrl = computed(() =>
     : ''
 )
 
-// ── Field definisi ────────────────────────────────────────
 const fields = [
   { key: 'nomorSurat',   label: 'Nomor Surat' },
   { key: 'namaKlien',    label: 'Nama Klien' },
@@ -198,7 +206,7 @@ const fields = [
   { key: 'tahun',        label: 'Tahun' },
   { key: 'lokasi',       label: 'Lokasi / Kota' },
   { key: 'jangkaWaktu',  label: 'Masa Berlaku' },
-  { key: 'tier1',        label: 'Tier 1 — Teks Display (contoh: Rp 200.000 - Rp 350.000)' },
+  { key: 'tier1',        label: 'Tier 1 — Teks Display' },
   { key: 'tier2',        label: 'Tier 2 — Teks Display' },
   { key: 'tier3',        label: 'Tier 3 — Teks Display' },
   { key: 'tier4',        label: 'Tier 4 — Teks Display' },
@@ -221,7 +229,6 @@ const tierHargaForm = computed(() => contract.value?.tierHarga ?? {
   tier1: 200000, tier2: 400000, tier3: 1000000, tier4: 2500000, monitoring: 400000
 })
 
-// ── Actions ───────────────────────────────────────────────
 async function save(key) {
   await saveField({ [key]: form.value[key] })
 }
@@ -246,7 +253,6 @@ async function handleSaveDevSignature(base64) {
   await saveDevSignature(base64)
 }
 
-// ── Status ────────────────────────────────────────────────
 const statusLabel = computed(() => ({
   draft:        'Draft',
   waiting_sign: 'Menunggu TTD',
@@ -259,12 +265,10 @@ const statusClass = computed(() => ({
   completed:    'bg-green-100 text-green-700',
 }[contract.value?.status]))
 
-// ── Download PDF ──────────────────────────────────────────
 async function downloadPDF() {
   const content    = document.getElementById('documentToPrint').innerHTML
   const namaKlien  = contract.value?.namaKlien ?? 'Klien'
   const nomorSurat = contract.value?.nomorSurat ?? ''
-  const namaDev    = contract.value?.namaDev ?? 'Developer'
 
   const printWindow = window.open('', '_blank')
   printWindow.document.write(`
@@ -277,11 +281,9 @@ async function downloadPDF() {
           @page {
             size: A4;
             margin: 20mm 20mm 25mm 20mm;
-
             @top-left   { content: ""; }
             @top-center { content: ""; }
             @top-right  { content: ""; }
-
             @bottom-left {
               content: "Ref: ${nomorSurat}";
               font-family: Arial, sans-serif;
@@ -296,7 +298,6 @@ async function downloadPDF() {
             }
             @bottom-right { content: ""; }
           }
-
           body {
             font-family: Arial, sans-serif;
             color: #000;
@@ -329,7 +330,6 @@ async function downloadPDF() {
     </html>
   `)
   printWindow.document.close()
-
   printWindow.onload = () => {
     printWindow.focus()
     printWindow.print()
